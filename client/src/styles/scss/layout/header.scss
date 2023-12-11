@@ -1,0 +1,161 @@
+@import '../abstracts/variables';
+@import '../abstracts/utils';
+@import '~include-media/dist/include-media';
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    flex-direction: row;
+    z-index: 9999;
+    height: 5rem;
+    position: absolute;
+    backdrop-filter: blur(5px);
+}
+
+.header-divTwo {
+    display: flex;
+    flex-direction: row;
+    transition: all 1s;
+
+    @include media('<800px') {
+        display: none;
+        flex-direction: column;
+    }
+}
+#date-input {
+    border: none;
+    color: black;
+    width: 86%;
+}
+
+.header-nav {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+
+    @include media('<800px') {
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        margin-top: 5rem;
+    }
+}
+.pcMode {
+    display: flex;
+    @include media('<800px') {
+        display: none;
+    }
+}
+.mobMode {
+    display: none;
+}
+
+.logo-text {
+    margin: 1rem;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scale: 1.5;
+}
+
+.logo-img {
+    width: 8rem;
+    height: 4rem;
+}
+
+.tab-menu-div {
+    display: none;
+    padding: 0;
+    @include media('<800px') {
+        display: block;
+    }
+}
+
+#tab-menu-btn {
+    display: block;
+    border: none;
+    box-shadow: none;
+    background-color: inherit;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media('<800px') {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+.menu li a {
+    padding: 0.5rem;
+}
+
+#grpSearch-input {
+    width: 50%;
+    box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.1);
+}
+#grpSearch-btn {
+    @include box(40px);
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.menu-button {
+    background-color: #e0e0e0;
+
+    border: none;
+    padding: 5px;
+    margin: 0;
+    width: 5rem;
+    @include media('<800px') {
+        border: none;
+        margin: 0rem 0.4rem;
+        // color: white;
+        box-shadow: none;
+    }
+}
+.menu-button:focus {
+    // background-color: white;
+    color: $color-gray4;
+}
+#logout-btn {
+    width: 2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-left: 1.2rem;
+}
+.myPage-btn {
+    margin-left: 0.5rem;
+    border-radius: 50%;
+}
+
+#chat-li {
+    cursor: pointer;
+    margin-left: 0.4rem;
+
+    @include media('<800px') {
+        display: flex;
+        margin-left: 1rem;
+    }
+}
+#chat-btn {
+    width: 40px;
+    height: 40px;
+    margin-left: 1rem;
+}

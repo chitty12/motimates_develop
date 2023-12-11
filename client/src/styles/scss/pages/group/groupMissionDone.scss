@@ -1,0 +1,14 @@
+@import '../../abstracts/variables';
+
+.mission-done-header {
+    display: flex;
+    gap: 9rem;
+
+    margin-bottom: 1rem;
+
+    background-color: transparent;
+}
+
+.mission-done-list {
+    display: flex;
+}

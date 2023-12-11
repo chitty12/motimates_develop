@@ -1,0 +1,128 @@
+@import '../../abstracts/variables';
+@import '~include-media/dist/include-media';
+
+.post-detail-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 2rem;
+    height: 100%;
+    @include media('<500px') {
+        width: 60%;
+    }
+}
+
+.post-detail-header-container {
+    display: flex;
+    flex-direction: column;
+
+    .post-detail-header {
+        align-items: center;
+        justify-content: space-between;
+        display: flex;
+    }
+}
+
+.writer-menu {
+    display: flex;
+    justify-content: flex-end;
+    color: $color-gray7;
+    gap: 0.8rem;
+    padding-bottom: 2rem;
+    cursor: pointer;
+
+    .writer-menu-content {
+        display: flex;
+        gap: 1rem;
+    }
+}
+
+.post-detail-profile {
+    display: flex;
+    align-items: center;
+}
+
+.date {
+    color: $color-gray4;
+    text-align: right;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    margin-right: 1rem;
+    border-radius: 50%;
+}
+
+.writer-menu {
+    display: flex;
+
+    .writer-menu-content {
+        display: flex;
+        gap: 1rem;
+    }
+}
+
+.post-detail-content {
+    width: 100%;
+    margin-bottom: 3rem;
+    white-space: normal; // 꼭 넣어야 해요 ...!
+}
+
+.comment-create {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 1rem;
+    @include media('<500px') {
+        height: 80%;
+    }
+
+    .comment-textarea {
+        width: 100%;
+        height: 100%;
+        border: 1px solid $color-gray2;
+        border-radius: 20px;
+        padding: 1.6rem;
+    }
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1.5rem 0 0.5rem 0;
+    padding-top: 1rem;
+
+    ul {
+        display: flex;
+        width: 100%;
+    }
+
+    li {
+        display: flex;
+        width: 100%;
+        align-items: center;
+    }
+}
+
+.comment-profile {
+    display: flex;
+    align-items: center;
+
+    .comment-img {
+        width: 50px;
+        height: 50px;
+        margin-right: 1rem;
+        border-radius: 50%;
+    }
+}

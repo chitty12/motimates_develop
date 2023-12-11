@@ -1,0 +1,77 @@
+@import '../../abstracts/variables';
+@import '../../abstracts/utils';
+@import '~include-media/dist/include-media';
+
+.input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    @include media('<960px') {
+        flex-direction: column;
+    }
+    input {
+        width: 100%;
+    }
+
+    button {
+        width: 4rem;
+        background-color: $color-gray4;
+    }
+
+    button:hover {
+        transition: 0.4s all;
+        background-color: $color-gray7;
+    }
+}
+
+.group-container {
+    width: 80%;
+    min-height: 80vh;
+}
+
+.groups {
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.groups-interested {
+    label {
+        height: 2rem;
+    }
+
+    margin-bottom: 1.6rem;
+}
+
+.search-group-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    @include media('<700px') {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.search-group-container {
+    width: 8rem;
+    height: 8rem;
+    background-color: $color-primary;
+    border-radius: 1rem;
+    color: white;
+    padding: 2rem;
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-btns {
+    width: 30%;
+    display: flex;
+}

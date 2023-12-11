@@ -1,0 +1,497 @@
+@import '../abstracts/variables.scss';
+@import '../abstracts/utils.scss';
+@import '~include-media/dist/include-media';
+
+//=== 미션 추가 모달 ===
+
+.modal-mission-add-container {
+    width: 76vw;
+
+    border-radius: 10px;
+    z-index: -1;
+    position: fixed;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-mission-add-content {
+    display: flex;
+    flex-direction: column;
+
+    // 모달 화면 안 넘어가도록 강제 scroll
+    overflow-y: auto !important;
+    max-height: 70vh;
+
+    width: 100%;
+    height: 80%;
+    align-items: center;
+
+    button {
+        border-radius: 10px;
+        width: 80%;
+    }
+}
+
+.modal-mission-btn-container {
+    display: flex;
+
+    button {
+        border-radius: 10px;
+        width: 80%;
+        margin: 1.2rem auto;
+        white-space: nowrap;
+        @include media('<800px') {
+            width: 7rem;
+            height: 3rem;
+        }
+    }
+}
+
+.modal-mission-add-close-icon {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    position: fixed;
+    // padding: 1rem;
+}
+
+.modal-mission-delete-btn {
+    background-color: $color-gray6 !important;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.modal-mission-delete-btn:hover {
+    transition: 0.3s all;
+    background-color: $color-warning !important;
+}
+
+.modal-style {
+    width: 76vw;
+
+    z-index: 150;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    justify-content: center;
+
+    animation: modal-show 0.3s;
+    padding: 2rem;
+    background-color: white;
+    @include media('<800px') {
+        width: 70%;
+        height: 30rem;
+    }
+    @include media('<500px') {
+        width: 60%;
+        height: 30rem;
+    }
+    @include media('<300px') {
+        width: 10rem;
+        height: 20rem;
+    }
+}
+
+.warning-modal-style {
+    width: 40rem;
+    height: 28rem;
+    z-index: 150;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    justify-content: center;
+
+    animation: modal-show 0.3s;
+    padding: 2rem;
+    background-color: white;
+    @include media('<800px') {
+        width: 70%;
+        height: 20rem;
+    }
+    @include media('<500px') {
+        width: 60%;
+        height: 30rem;
+    }
+    @include media('<300px') {
+        width: 10rem;
+        height: 20rem;
+    }
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+@include fadeIn(modal-show);
+
+.modal-mission-add-upper {
+    display: flex;
+    padding-bottom: 1rem;
+}
+
+.modal-title-mission-create {
+    margin: auto;
+}
+
+.modal-mission-header {
+    display: flex;
+    width: 90%;
+    align-items: center;
+    gap: 4rem;
+
+    .css-q8hpuo-MuiFormControl-root {
+        @include media('<860px') {
+            width: 60%;
+        }
+    }
+
+    @include media('<860px') {
+        flex-direction: column;
+        width: 80%;
+    }
+    @include media('<500px') {
+        gap: 1rem;
+    }
+}
+
+.modal-mission-list-header {
+    display: flex;
+    width: 88%;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $color-gray1;
+    border-radius: 10px;
+    padding: 0 2.4rem;
+    margin: auto;
+    flex-direction: column;
+
+    @include media('<500px') {
+        flex-direction: column;
+    }
+
+    .group-create-content {
+        width: 100%;
+
+        overflow-y: auto !important;
+        max-height: 70vh;
+    }
+    .dday-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+
+        @include media('<800px') {
+            width: 100%;
+        }
+
+        input {
+            width: 60%;
+
+            @include media('<800px') {
+                width: 100%;
+            }
+        }
+    }
+    #dday-text {
+        width: 100%;
+    }
+}
+
+.modal-mission-box {
+    justify-content: center;
+    padding: 1rem 0;
+
+    @include media('<800px') {
+        flex-direction: column;
+    }
+}
+
+.modal-btn-add {
+    background-color: $color-gray4 !important;
+    @include media('<800px') {
+        width: 5rem;
+    }
+}
+
+.modal-btn-add:hover {
+    background-color: $color-gray7;
+    transition: all 0.3s;
+}
+
+.modal-mission-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 80%;
+    @include media('<860px') {
+        margin: 0 auto;
+        justify-content: center;
+    }
+    @include media('<500px') {
+        padding-left: 27px;
+    }
+}
+
+.modal-proof-input {
+    margin: 2rem;
+}
+
+.proof-box {
+    .css-xybfnn {
+        .MuiTextField-root {
+            @include media('<800px') {
+                width: 40ch;
+            }
+
+            @include media('<500px') {
+                width: 20ch;
+            }
+        }
+    }
+}
+
+.modal-mission-list {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 3rem;
+    width: 80%;
+    background-color: $color-gray1;
+    border-radius: 20px;
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+
+    ul {
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+.modal-mission-list-text {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: $color-gray1;
+}
+
+.modal-btn-done {
+    margin: 2rem auto 0 auto;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include media('<800px') {
+        width: 5rem;
+    }
+}
+
+.modal-mission-cancel-content {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 90%;
+    width: 90%;
+    margin: 3rem;
+
+    overflow-y: auto !important;
+    max-height: 70vh;
+}
+
+.modal-cancel-header {
+    display: flex;
+}
+
+.modal-cancel-title-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.mission-cancel-modal-mission-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40rem;
+
+    label {
+        width: 100%;
+        display: flex;
+        margin: 1rem;
+        border-radius: 10px;
+        padding: 1rem;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s all;
+
+        box-shadow: 0px 1.7px 2.2px rgba(0, 0, 0, 0.02),
+            0px 4px 5.3px rgba(0, 0, 0, 0.028),
+            0px 7.5px 10px rgba(0, 0, 0, 0.035),
+            0px 13.4px 17.9px rgba(0, 0, 0, 0.042),
+            0px 25.1px 33.4px rgba(0, 0, 0, 0.05),
+            0px 60px 80px rgba(0, 0, 0, 0.07);
+    }
+
+    input {
+        display: none;
+    }
+
+    div {
+        color: white;
+    }
+}
+
+.modal-member-list {
+    gap: 3rem;
+    img {
+        width: 100px !important;
+        height: 55px !important;
+    }
+}
+
+.modal-member-list-label {
+    width: 90%;
+    display: flex;
+    border-radius: 10px;
+    padding: 1rem;
+    transition: 0.3s all;
+}
+
+.mission-cancel-modal-memeber-input {
+    display: none;
+}
+
+.modal-member-list-container {
+    // background-color: $color-gray2;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-member-list-ul {
+    li {
+        padding: 1rem;
+        border-radius: 14px;
+    }
+}
+
+.modal-member-list-li {
+    cursor: pointer;
+}
+
+.modal-member-list-li:hover {
+    color: white;
+    background-color: $color-warning;
+    transition: 0.4s all;
+}
+
+.leader-patch-btn {
+    width: 40%;
+    background-color: $color-gray8 !important;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media('<500px') {
+        height: 4rem;
+        font-size: 0.1rem;
+    }
+}
+
+.mission-cancel-done-btn {
+    width: 40%;
+    background-color: $color-gray8 !important;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media('<500px') {
+        height: 4rem;
+        font-size: 0.1rem;
+    }
+}
+
+.mission-cancel-done-btn:hover {
+    width: 40%;
+    background-color: $color-warning !important;
+    transition: all 0.3s;
+}
+
+.mission-cancel-back-btn {
+    width: 40%;
+    background-color: $color-gray4 !important;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media('<500px') {
+        height: 4rem;
+        font-size: 0.1rem;
+    }
+}
+
+.mission-cancel-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.modal-line {
+    margin: 2rem 0;
+    border: 1px solid $color-gray2;
+}
+
+.modal-form {
+    margin-top: 2rem;
+}
+
+//=== 탈퇴 모달 ===
+.leave-modal-content {
+    margin: 0;
+    display: flex;
+    margin: 20% auto;
+
+    overflow-y: auto !important;
+    max-height: 70vh;
+}
+
+.leave-modal-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+//=== 미션 수정 모달 ===
+.mission-edit-list-content {
+    display: flex;
+    flex-direction: row;
+    @include media('<800px') {
+        flex-direction: column;
+    }
+
+    overflow-y: auto !important;
+    max-height: 70vh;
+}
+.modal-mission-edit-btn {
+    background-color: $color-gray3 !important;
+    cursor: pointer;
+    white-space: nowrap;
+}

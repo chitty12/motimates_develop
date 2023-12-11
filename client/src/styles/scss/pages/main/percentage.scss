@@ -1,0 +1,102 @@
+@import '../../abstracts/variables';
+@import '../../abstracts/utils';
+@import '~include-media/dist/include-media';
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 30px;
+
+    min-width: 200px;
+
+    .content-grid-box {
+        width: 100%;
+        height: fit-content;
+        margin: 0 auto;
+        padding: 5px;
+    }
+    @include media('<800px') {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.percentage-div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: white;
+    padding: 1rem 1rem;
+
+    .progress-img-flex {
+        display: flex;
+        justify-content: space-between;
+
+        flex-direction: column-reverse;
+        align-items: center;
+
+        .my-progress-img {
+            max-width: 165px;
+
+            width: 30vw;
+        }
+    }
+
+    .progress-bar-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 1rem 0;
+        .profile-img-div-flex {
+            display: flex;
+            flex-direction: column;
+
+            .profile-img {
+                width: 1.5rem;
+                height: 1.5rem;
+                margin: 1rem;
+                border-radius: 50%;
+            }
+        }
+
+        .progress-bar-flex {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            .progress-div {
+                width: 100%;
+                margin: auto;
+                .my-progress {
+                    width: 130px;
+                    height: 1em;
+                    border-radius: 10px;
+                    background-color: $color-gray1;
+
+                    .my-bar-one {
+                        width: 80%;
+                        height: 1em;
+                        border-radius: 10px;
+
+                        background-color: $color-IT;
+                    }
+                    .my-bar-two {
+                        width: 70%;
+                        height: 1em;
+                        border-radius: 10px;
+
+                        background-color: $color-exercise;
+                    }
+                }
+            }
+        }
+    }
+
+    .team-progress-img-div-flex {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.my-progress-img-background {
+    background-color: $color-gray1;
+    border-radius: 50%;
+}

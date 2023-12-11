@@ -1,0 +1,119 @@
+@import '../../abstracts/variables';
+@import '~include-media/dist/include-media';
+
+.post-container {
+    margin: 1rem;
+    width: 80%;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    background-color: transparent;
+
+    @include media('<800px') {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0;
+    }
+    .select-box {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .post-title {
+        margin-left: 2rem;
+        gap: 1rem;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        @include media('<800px') {
+            margin: 0;
+        }
+        @include media('<500px') {
+            width: 4rem;
+        }
+    }
+
+    input {
+        width: 25vw;
+        @include media('<800px') {
+            width: 50vw;
+        }
+    }
+}
+
+.post-mission-header {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    // gap: 1rem;
+    background-color: transparent;
+    @include media('<800px') {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0;
+    }
+}
+
+.post-mission-title {
+    width: 100%;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    // margin-top: 1rem;
+
+    @include media('<800px') {
+        margin: 0;
+    }
+    @include media('<500px') {
+        width: 4rem;
+    }
+}
+
+.mission-input {
+    @include media('<800px') {
+        width: 50vw;
+    }
+}
+
+.editor-post-btn {
+    background-color: $color-primary;
+    color: $color-white;
+    border: none;
+    padding: 0.8rem;
+    margin: 20px 0;
+    font-size: 1.4rem;
+    width: 54vw;
+    @include media('<800px') {
+        width: 65vw;
+    }
+    @include media('<500px') {
+        width: 17rem;
+    }
+}
+
+.editor {
+    width: 94%;
+    height: 20rem;
+    border: none;
+    border-radius: 10px;
+    margin: 1rem 3rem 0 2rem;
+    padding: 1rem;
+}
+
+.ql-container {
+    height: 15rem;
+}
+
+.mission-type {
+    display: flex;
+    width: 100%;
+    white-space: nowrap;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+}

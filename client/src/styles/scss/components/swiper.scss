@@ -1,0 +1,80 @@
+.swiper-button-container {
+    display: flex;
+    align-items: center;
+}
+
+.swiper {
+    width: 600px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+// 화살표 버튼 추가 예정
+.swiper-button-next,
+.swiper-button-prev {
+    width: 30px; /* 화살표 너비 설정 */
+    height: 30px; /* 화살표 높이 설정 */
+    background-size: 100%;
+    background-position: center;
+    position: relative;
+    border-radius: 50%; /* 원 모양으로 화살표 스타일링 (선택 사항) */
+    display: block;
+    cursor: pointer;
+    margin: 10px;
+}
+
+// .swiper-button-next {
+//     background-image: url('../../../../public/asset/icons/search.svg');
+//     background-size: 100%;
+//     background-position: bottom;
+//     position: relative;
+// }
+
+// .swiper-button-prev {
+//     background-image: url('../../../../public/asset/icons/search.svg') no-repeat;
+//     background-size: 100%;
+//     background-position: bottom;
+//     position: relative;
+// }
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    display: none;
+}
+
+// 카드 스타일링
+.swiper-slide {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    // margin: 0 5px; // 카드 간격
+    border-radius: 14px;
+}
+
+// 카드 이미지 가운데
+.swiper-slide img {
+    width: 100%;
+}
+
+// .swiper-slide {
+//     background-position: center;
+//     background-size: cover;
+// }
+
+/* 마지막 슬라이드의 오른쪽 여백 제거 (옵션) */
+// .swiper-slide:last-child {
+//     margin-right: 10px;
+// }
+
+.swiper-card {
+    // font-size: 22px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin: 0 16px;
+}

@@ -1,0 +1,28 @@
+.summary-card-layout {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin: 20px 10px;
+}
+
+.summary-paper {
+    min-width: 130px;
+    height: 100px;
+
+    display: flex;
+    justify-content: space-around;
+
+    .summary-title-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .summary-title {
+            font-size: 12px;
+        }
+    }
+
+    img {
+        width: 3em;
+    }
+}

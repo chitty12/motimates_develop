@@ -1,0 +1,16 @@
+//=== 검색 ===
+.search {
+    width: 30rem;
+    height: 40px;
+
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../../../../public/asset/icons/search.svg');
+    background-size: 30px 30px;
+    background-position: 6px 4px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+}

@@ -1,0 +1,99 @@
+@import '../abstracts/variables';
+@import '../abstracts/utils';
+
+@font-face {
+    font-family: 'crayon';
+    src: url('../../../../public/asset/fonts/crayon.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.err-section {
+    background: white;
+    color: $color-err-txt;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-family: crayon !important;
+    display: flex;
+    flex-direction: column;
+}
+.errMsg-div {
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    letter-spacing: 1em;
+}
+.errMsg-div span {
+    font-size: 5rem;
+    transform: skewY(30deg);
+    text-shadow: 2px 5px $color-primary;
+    // animation: bounce 0.3s ease infinite alternate;
+}
+.errMsg-div span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+.errMsg-div span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+#errRabbit-img {
+    width: 80%;
+    height: 60%;
+    animation: qm 1s ease infinite alternate;
+}
+
+.errBtn-div {
+    height: fit-content;
+}
+#err-btn {
+    width: 100%;
+    height: 70%;
+    background-color: $color-primary;
+    color: white;
+    box-shadow: 5px 5px $color-err-txt;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+    padding: 1rem;
+    margin: 1rem 1rem;
+    border-radius: 15px;
+    border: none;
+}
+
+#err-btn:hover {
+    transform: scale(1.2);
+    background-color: whitesmoke;
+    color: $color-err-txt;
+}
+
+h1 span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+h1 span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+h1 span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+    100% {
+        top: -20px;
+        text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
+            0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc,
+            0 50px 25px rgba(0, 0, 0, 0.2);
+    }
+}
+
+@keyframes qm {
+    0% {
+        transform: skewX(0deg); /* 0%에서는 비틀리지 않음 */
+    }
+    50% {
+        transform: skewX(10deg);
+    }
+    100% {
+        transform: skewX(0deg);
+    }
+}
