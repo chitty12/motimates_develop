@@ -5,11 +5,7 @@
 서로 동기부여를 주는 메이트들
 모임 멤버들과 함께 목표를 달성하는 커뮤니티 사이트
 
----
-
 # 프로젝트 소개
-
----
 
 [발표자료](https://docs.google.com/presentation/d/1-889w-hx7lc29qffDdI8is45T3xxHF-RqPEXBAd9i2I/edit#slide=id.g298a1fc9f63_2_0)
 [Notion](https://polydactyl-cello-2db.notion.site/Motimates-4617b0dbabe640deb5336bb2dddcd54a?pvs=4)
@@ -20,11 +16,9 @@
 
 ## ⏰ 제작 기간
 
----
+December 11, 2023 ~ December 27, 2023
 
-October 23, 2023 ~ November 10, 2023
-
-## **🧑‍🤝‍🧑** Team Crew - FE
+## **🧑‍🤝‍🧑** Team Crew
 
 ---
 
@@ -63,8 +57,6 @@ October 23, 2023 ~ November 10, 2023
 
 # 시작 가이드
 
----
-
 ```bash
 $ git clone https://github.com/SesacProjectTeamA-2/pj-front.git
 ```
@@ -74,9 +66,9 @@ $ npm i
 $ npm start
 ```
 
-# \*\*⚙️ 개발 환경\*\*
+# ⚙️ 개발 환경
 
-### Front
+## Front
 
 <img src="https://img.shields.io/badge/HTML-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>
 <img src="https://img.shields.io/badge/CSS-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>
@@ -227,30 +219,23 @@ Swagger 를 통해 개인별 Token 할당 후, api 전송 정보 및 결과값�
 -   에러 상태 공지
 -   돌아가기 버튼 추가
 
-# 🚢 \***\*화면 설계서\*\***
-
----
+<!-- # 🚢 화면 설계서
 
 ![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/2c36d5f3-dde3-4ff3-96f2-ece216ae3b87)
 
-# \***\*🎨 와이어 프레임\*\***
+# 🎨 와이어 프레임
 
----
 
 [Figma](https://www.figma.com/file/wiiwMEqh7oAivKKO2uwbLe/Skygrey-218's-team-library?type=design&node-id=0-1&mode=design&t=Ul65uyHVEweViBth-0)
 
 ![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/3515f133-f7b3-4ecb-9e0b-0eb4d8f44503)
 
-# \***\*🗄️ ERD\*\***
+# 🗄️ ERD
 
 [ERD](https://www.erdcloud.com/d/koATx2ojGQyH5Y62S)
-![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/887bcebc-2966-4f5e-a2fa-a0033377fe8c)
+![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/887bcebc-2966-4f5e-a2fa-a0033377fe8c) -->
 
----
-
-# \***\*📂 프로젝트 폴더 구조\*\***
-
----
+# 📂 프로젝트 폴더 구조
 
 ## [ FE ]
 
