@@ -11,7 +11,7 @@ export default function CharacterList(props: any) {
     const characterArr: Character[] = [
         {
             id: 'character-radio-rabbit',
-            imgSrc: '/asset/images/rabbit2.svg',
+            imgSrc: '/asset/images/rab2.svg',
             alt: 'img1',
             val: 'rabbit',
         },

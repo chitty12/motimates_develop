@@ -48,12 +48,25 @@ function App() {
         setShowChat(!showChat);
     };
 
+    const [isIntro, setIsIntro] = useState<boolean>(false);
+
     return (
         // <SocketContext.Provider value={socket}>
         <div className="App">
-            <Header showChatting={showChatting} showChat={showChat} />
+            <Header
+                showChatting={showChatting}
+                showChat={showChat}
+                isIntro={isIntro}
+                setIsIntro={setIsIntro}
+            />
+
             <Routes>
-                <Route path="/" element={<Intro />} />
+                <Route
+                    path="/"
+                    element={
+                        <Intro isIntro={isIntro} setIsIntro={setIsIntro} />
+                    }
+                />
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
 
@@ -161,7 +174,6 @@ function App() {
 
                 <Route
                     path="/board/:gSeq/:gCategory"
-                    // path="*/post"
                     element={
                         <GroupLayout
                             children={<BoardPost />}

@@ -1,12 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import '../styles/scss/pages/intro.scss';
 import Text from './Text';
 
 import JSConfetti from 'js-confetti'; // 빵빠레
 
-export default function Intro() {
+export default function Intro(props: any) {
+    const navigate = useNavigate();
+
+    //-- 채팅 아이콘 제외
+    useEffect(() => {
+        props.setIsIntro(true);
+
+        // 페이지를 벗어날 때 이벤트 핸들러 등록
+        const handleLeavePage = () => {
+            // 페이지를 벗어날 때 setIsIntro(false) 호출
+            props.setIsIntro(false);
+        };
+
+        // 컴포넌트가 마운트될 때 이벤트 핸들러 등록
+        const unmountHandler = () => {
+            props.setIsIntro(false);
+        };
+
+        // 컴포넌트가 언마운트될 때 등록한 이벤트 핸들러 제거
+        return () => {
+            unmountHandler();
+        };
+    }, [navigate, props]);
+
     //HTML Canvas 요소를 생성하여 페이지에 추가
     const jsConfetti = new JSConfetti();
 
