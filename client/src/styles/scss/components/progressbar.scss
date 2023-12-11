@@ -1,0 +1,23 @@
+@import '../abstracts/variables';
+
+.progress-div {
+    width: 100%;
+    // margin-top: 4%;
+    // background-color: aqua;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    .my-progress {
+        width: 100%;
+        background-color: $color-white;
+        border-radius: 30px;
+
+        .my-bar {
+            width: 30%;
+            height: 16px;
+            background-color: $color-IT;
+            border-radius: 30px;
+        }
+    }
+}

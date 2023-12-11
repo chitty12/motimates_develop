@@ -1,0 +1,238 @@
+@import '../abstracts/variables';
+@import '../abstracts/utils';
+@import '~include-media/dist/include-media';
+
+.sidebar-all {
+    width: 100%;
+}
+
+.sidebar-container {
+    background-color: white;
+    color: $color-primary;
+    display: flex;
+    gap: 10px;
+
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    
+    .sidebar-list {
+        width: 100%;
+
+        height: fit-content;
+        .sidebar-theme-list {
+            display: flex;
+            flex-direction: column;
+            .theme-flex {
+                display: flex;
+                flex-direction: column;
+                @include media('<900px') {
+                    flex-direction: row;
+                    width: 100%;
+                }
+                .theme-title {
+                    width: 100%;
+                    padding: 10px 0;
+
+                    @include media('<900px') {
+                        width: 35vw;
+                    }
+
+                    display: flex;
+                    justify-content: center;
+                    background-color: $color-primary;
+                    color: white;
+                }
+
+                @include media('<900px') {
+                    .mission-res {
+                        width: 65vw;
+                    }
+                }
+
+                .mission-flex {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                }
+            }
+            .mission-title {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                background-color: $color-primary;
+                color: white;
+                opacity: 50%;
+                // font-weight: 700;
+                padding: 7px 0;
+            }
+        }
+    }
+}
+
+@include media('<900px') {
+    .sidebar-theme {
+        margin: 7px 15px;
+    }
+}
+.sidebar-content {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    .board-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        @include media('<900px') {
+            width: 65vw;
+            flex-direction: row;
+            .sidebar-theme {
+                margin: 7px 15px;
+            }
+        }
+    }
+    .progress-mission {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include media('<900px') {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}
+
+// 모임장 사이드바
+.leader-menu {
+    padding: 0;
+    color: $color-gray7;
+
+    li {
+        padding: 0.2rem 0;
+        font-weight: bold;
+    }
+}
+
+.member-menu,
+.leader-menu {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    li {
+        padding: 0.4rem 0;
+    }
+}
+
+.leader-edit {
+    transition: 0.3s all;
+    display: flex;
+    justify-content: center;
+}
+.leader-edit:hover {
+    transition: 0.3s all;
+}
+
+.leader-warning,
+.member-leave {
+    color: $color-gray5;
+    opacity: 0.5;
+    @include media('<900px') {
+        padding: 5px 25px;
+    }
+}
+
+.member-menu {
+    @include media('<900px') {
+        padding: 5px 65px;
+    }
+}
+.leader-warning:hover {
+    color: $color-warning-menu;
+    transition: 0.3s all;
+    opacity: 0.9;
+}
+
+.member-leave:hover {
+    color: $color-warning-menu;
+    transition: 0.3s all;
+    opacity: 0.9;
+}
+
+.leader-content {
+    @include media('<900px') {
+        // width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 5px 25px;
+    }
+}
+
+// 드롭 다운 기능 구현
+.dropbtn {
+    display: none; //900px 이상에서는 안 보이도록
+    width: 100%;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+// 900px 이하에서만 드롭다운 할 수 있도록
+@include media('<900px') {
+    .dropbtn {
+        display: inherit;
+    }
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+        width: 100vw;
+        border: none;
+        outline: none;
+        color: white;
+        background-color: $color-primary;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+        z-index: 100;
+    }
+}
+
+.sidebar-theme {
+    margin: 7px 15px;
+}
+
+.empty-side-bar {
+    height: 5vh;
+}
+
+.side-bar-leader-member {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9e9e9;
+}

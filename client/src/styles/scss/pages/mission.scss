@@ -1,0 +1,97 @@
+@import '../abstracts/variables';
+@import '../abstracts/utils';
+
+.checked {
+    text-decoration-line: line-through;
+}
+
+.mission-item-ul1 {
+    background-color: $color-IT;
+    margin: 10px 10px;
+    padding: 20px 20px;
+
+    border-radius: 20px;
+    color: white;
+}
+
+.mission-item-ul2 {
+    background-color: $color-exercise;
+    margin: 10px 10px;
+    padding: 20px 20px;
+
+    border-radius: 20px;
+    color: white;
+}
+
+.MissionList-header {
+    display: flex;
+    justify-content: space-between;
+    .group {
+        color: white;
+        font-weight: 700;
+
+        margin: 10px 10px;
+    }
+
+    .dDay {
+        color: white;
+        font-weight: 700;
+        margin: 10px 10px;
+    }
+}
+
+.no-button {
+    display: none;
+}
+
+.is-checked-img {
+    width: 20px;
+}
+
+.mission-all-container {
+    height: 70vh;
+}
+
+.list-face {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0 auto;
+    .list {
+        width: 60%;
+    }
+
+    .face-div {
+        width: 20%;
+        .face-background {
+            position: relative;
+            justify-content: center;
+            align-items: center;
+
+            display: flex;
+            border-radius: 50%;
+            width: 8em;
+            height: 8em;
+            margin: 10px 10px;
+            .face {
+                z-index: 5;
+                width: 200px;
+                img {
+                    height: 165px;
+                }
+            }
+        }
+        .progress-div {
+            .my-progress {
+                width: 100%;
+                background-color: grey;
+
+                .my-bar {
+                    width: 30%;
+                    height: 30px;
+                    background-color: $color-IT;
+                }
+            }
+        }
+    }
+}

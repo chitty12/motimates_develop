@@ -1,0 +1,78 @@
+@import '../../abstracts/variables';
+
+.noti-container {
+    width: 90%;
+    margin: 1rem;
+    border-radius: 10px;
+}
+
+.post-list-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: $color-white;
+    border-radius: 10px;
+    margin: 2rem;
+    .profile-img {
+        width: 3rem;
+        height: 3rem;
+        margin-right: 1rem;
+        border-radius: 50%;
+    }
+}
+
+.post-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-list-title {
+    display: flex;
+    align-items: center;
+}
+
+.post-list-date {
+    color: $color-gray4;
+    width: fit-content;
+    text-align: right;
+}
+
+.post-list-main {
+    padding: 1rem 1rem;
+}
+
+.post-list-footer {
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .img-comment {
+        margin-right: 0.5rem;
+    }
+
+    .img-emoji {
+        margin-left: 0.5rem;
+    }
+
+    .btn-emoji {
+        padding: 0.3rem 0.6rem;
+        border: 1px solid $color-white;
+        cursor: pointer;
+    }
+
+    .btn-emoji:hover {
+        // background-color: $color-white;
+        border: 1px solid $color-gray5;
+    }
+}
+
+.cursor {
+    cursor: pointer;
+}

@@ -1,0 +1,35 @@
+// 정사각형
+@mixin box($size) {
+    width: $size;
+    height: $size;
+}
+
+//=== 스르륵 사용방법 ===
+// 사용하려는 클래스명에
+//-- animation: class명 0.3s;
+// 추가하고, class명을 넣어주세요 !
+// @include fadeIn(class명);
+
+// 스르륵 나타나기
+@mixin fadeIn($class) {
+    @keyframes #{$class} {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+// 스르륵 사라지기
+@mixin fadeOut($class) {
+    @keyframes #{$class} {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+}

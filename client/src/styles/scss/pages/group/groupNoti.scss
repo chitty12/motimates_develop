@@ -1,0 +1,117 @@
+@import '../../abstracts/variables';
+@import '~include-media/dist/include-media';
+
+.section-group {
+    padding: 0;
+    width: 100%;
+    display: flex;
+
+    min-height: 70vh;
+    justify-content: flex-start;
+}
+.noti-info {
+    padding: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.noti-table {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    border-collapse: collapse; /* 인접한 셀의 경계선을 합칩니다. */
+
+    thead {
+        background-color: $color-gray2;
+
+        border-radius: 10px;
+
+        th {
+            padding: 1rem;
+            margin: 1rem;
+        }
+    }
+}
+
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    padding: 0.5rem 1rem;
+    background-color: $color-gray6;
+    box-sizing: border-box;
+
+    @include media('<800px') {
+        padding: 0.5rem 2rem;
+    }
+    @include media('<500px') {
+        padding: 0.5rem 2rem;
+        font-size: 1.2rem;
+    }
+}
+
+.noti-container {
+    width: 90%;
+    height: fit-content;
+    margin: 1rem;
+    border-radius: 10px;
+    height: 50vh;
+}
+
+.noti-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: $color-gray5;
+    border-radius: 10px 10px 0 0;
+}
+
+.noti-content {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 0;
+    background-color: $color-white;
+    border-radius: 0 0 10px 10px;
+
+    ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    li {
+        display: flex;
+        width: 90%;
+        justify-content: space-between;
+
+        div {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+    }
+}
+
+.plus-fixed-wrapper {
+    display: flex;
+    justify-content: flex-end;
+
+    position: absolute;
+    // top: 100%;
+    // bottom: 100%;
+    // left: 79%;
+    // transform: translateX(-50%);
+
+    height: 10vh;
+    position: sticky;
+    bottom: 4%;
+    margin-right: 5rem;
+    z-index: 10;
+    width: 100%;
+}

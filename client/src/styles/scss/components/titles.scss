@@ -1,0 +1,97 @@
+@import '~include-media/dist/include-media';
+
+.title1 {
+    font-size: 38px;
+    font-weight: bold;
+    @include media('<800px') {
+        font-size: 29px;
+    }
+    @include media('<500px') {
+        font-size: 1.2rem;
+    }
+}
+
+.title2 {
+    font-size: 32px;
+    font-weight: bold;
+    @include media('<800px') {
+        font-size: 1.5rem;
+    }
+    @include media('<500px') {
+        font-size: 1rem;
+    }
+}
+
+.title3 {
+    font-size: 28px;
+    font-weight: bold;
+    @include media('<800px') {
+        font-size: 21px;
+    }
+    @include media('<500px') {
+        font-size: 15px;
+    }
+}
+
+.title4 {
+    font-size: 24px;
+    font-weight: bold;
+    @include media('<800px') {
+        font-size: 18px;
+    }
+    @include media('<500px') {
+        font-size: 13px;
+    }
+}
+
+.title5 {
+    font-size: 18px;
+    font-weight: bold;
+    @include media('<800px') {
+        font-size: 13px;
+    }
+    @include media('<500px') {
+        font-size: 10px;
+    }
+}
+
+.title6 {
+    font-size: 14px;
+    font-weight: bold;
+    @include media('<800px') {
+        font-size: 10px;
+    }
+    @include media('<500px') {
+        font-size: 6px;
+    }
+}
+
+.title7 {
+    font-size: 18px;
+    @include media('<800px') {
+        font-size: 10px;
+    }
+    @include media('<500px') {
+        font-size: 6px;
+    }
+}
+
+.title8 {
+    font-size: 14px;
+    @include media('<800px') {
+        font-size: 10px;
+    }
+    @include media('<500px') {
+        font-size: 6px;
+    }
+}
+
+.title-card {
+    font-size: 22px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}

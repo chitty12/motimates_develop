@@ -1,0 +1,81 @@
+@import '../../abstracts/variables';
+@import '~include-media/dist/include-media';
+
+.menu a {
+    color: $color-white;
+    font-family: Lato;
+    font-size: 17pt;
+    font-weight: 400;
+    padding: 15px 25px;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.SMN_effect-42 a {
+    position: relative;
+}
+
+.SMN_effect-42 a:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $color-white;
+    transform-origin: 100% 50%;
+    transform: scale(0, 1);
+    top: 0;
+    left: 0;
+    transition: transform 0.3s cubic-bezier(0.33, 0.91, 0.42, 1);
+}
+
+.SMN_effect-42 a:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.3);
+
+    left: 0;
+    bottom: 0;
+    transform-origin: 0% 50%;
+    transition: transform 0.3s cubic-bezier(0.33, 0.91, 0.42, 1) 0.2s;
+}
+
+.SMN_effect-42 a span {
+    position: relative;
+}
+
+.SMN_effect-42 a span:after {
+    content: attr(data-hover);
+    position: absolute;
+
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s cubic-bezier(0.33, 0.91, 0.42, 1) 0s;
+}
+
+.SMN_effect-42 a:hover:before {
+    transform: scale(1);
+    transform-origin: 0 50%;
+    transition: transform 0.3s cubic-bezier(0.33, 0.91, 0.42, 1) 0.2s;
+}
+
+.SMN_effect-42 a:hover:after {
+    transform: scale(0, 1);
+    transform-origin: 100% 50%;
+    transition: transform 0.3s cubic-bezier(0.33, 0.91, 0.42, 1) 0s;
+}
+
+.SMN_effect-42 a:hover span:after {
+    color: $color-primary;
+    transition: color 0.3s cubic-bezier(0.33, 0.91, 0.42, 1) 0.2s;
+}
+
+.SMN_effect-42 {
+    @include media('<900px') {
+        display: flex;
+    }
+}

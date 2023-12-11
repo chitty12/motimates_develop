@@ -1,0 +1,35 @@
+@import '../abstracts/variables';
+@import '~include-media/dist/include-media';
+
+// 전체 레이아웃 컨테이너
+.layout-container {
+    width: 100vw;
+    height: 100vh;
+}
+// 그룹 메뉴 바 컴포넌트 들어갈 곳
+.groupMenu-div {
+    background-color: white;
+}
+.manageMenu-div {
+    // background-color: $color-primary;
+}
+
+// Group | Basic Layout
+// 컨텐츠 컴포넌트 들어갈 곳
+.section-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    // background-color: $color-gray1;
+    height: 100%;
+
+    @include media('<500px') {
+        width: 100%;
+    }
+}
+
+// 채팅 컴포넌트 들어갈 곳
+.chatting-div {
+    // background-color: white;
+}
