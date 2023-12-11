@@ -21,30 +21,12 @@ import { GroupDetailType, RootStateType } from '../../../src/types/types'; // Re
 // import JSConfetti from 'js-confetti'; //_ 빵빠레
 
 export default function GroupHome() {
-    //HTML Canvas 요소를 생성하여 페이지에 추가
-    // const jsConfetti = new JSConfetti();
-
-    const dispatch = useDispatch();
-
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
     //-- redux test 용
-    // const test = {
-    //     gSeq: 1,
-    //     gName: '변경했어요..',
-    //     gDesc: '11111',
-    //     gDday: '2023-10-28',
-    //     gMaxMem: 10000000,
-    //     gCategory: 'it',
-    //     gCoverImg:
-    //         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
-    //     mTitle: '변경했어요..',
-    //     mContent: '변경했어요..',
-    //     mLevel: 5,
-    // };
+    // const dispatch = useDispatch();
 
-    //=== redux 상태관리 ===
     // const dummyGroupState = useSelector(
     //     (state: RootStateType) => state.dummyGroup
     // );

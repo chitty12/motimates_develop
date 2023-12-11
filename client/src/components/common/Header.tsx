@@ -32,9 +32,6 @@ export default function Header(props: any) {
             setIsVisibleMobile((prev) => !prev);
         }
     };
-    // useEffect(() => {
-    //     console.log('isVisibleMobile', isVisibleMobile);
-    // }, [isVisibleMobile]);
 
     const [isCookie, setIsCookie] = useState(false); // 쿠키 유무
 
@@ -210,26 +207,36 @@ export default function Header(props: any) {
                                     </li>
                                 ) : (
                                     <>
-                                        {/* 채팅 컴포넌트 */}
-                                        {/* <li id="chat-li"> */}
-                                        <img
-                                            src="/asset/icons/chat.svg"
-                                            style={{
-                                                width: '40px',
-                                                height: '40px',
-                                            }}
-                                            alt="chatImg"
-                                            onClick={() => props.showChatting()}
-                                            id="chat-btn"
-                                        />
-                                        {/* </li> */}
-                                        <img
-                                            src="/asset/icons/logout.svg"
-                                            alt="logout"
-                                            onClick={logoutHandler}
-                                            id="logout-btn"
-                                        />
+                                        {!props.isIntro && (
+                                            <div className="chat-icon-container">
+                                                <img
+                                                    src="/asset/icons/chat.svg"
+                                                    style={{
+                                                        width: '40px',
+                                                        height: '40px',
+                                                    }}
+                                                    alt="chatImg"
+                                                    onClick={() =>
+                                                        props.showChatting()
+                                                    }
+                                                    id="chat-btn"
+                                                />
+                                                <span id="chat-text">Chat</span>
+                                            </div>
+                                        )}
+
+                                        <div className="logout-icon-container">
+                                            <img
+                                                src="/asset/icons/logout.svg"
+                                                alt="logout"
+                                                onClick={logoutHandler}
+                                                id="logout-btn"
+                                            />
+                                            <span id="logout-text">Logout</span>
+                                        </div>
+
                                         <li>
+                                            {/* <div className="mypage-icon-container"> */}
                                             <Link to="/mypage">
                                                 <img
                                                     src={userImgSrc}
@@ -239,8 +246,11 @@ export default function Header(props: any) {
                                                     }}
                                                     alt="userImg"
                                                     className="myPage-btn"
-                                                ></img>
+                                                />
                                             </Link>
+
+                                            {/* <span id="mypage-text">My</span>
+                                            </div> */}
                                         </li>
                                     </>
                                 )}
