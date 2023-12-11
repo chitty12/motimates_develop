@@ -15,31 +15,27 @@ const jwt = require('../modules/jwt');
 // 모임 채팅 목록
 exports.getGroupChats = async (req, res) => {
   try {
-    // const token = req.headers.authorization.split(' ')[1];
-    // if (!token) {
-    //   res.send({
-    //     success: false,
-    //     msg: '토큰 X',
-    //   });
-    // }
-    // if (!uSeq) {
-    //   res.send({
-    //     success: false,
-    //     msg: '로그인X or 비정상적인 접근',
-    //   });
-    //   return;
-    // }
+    const token = req.headers.authorization.split(' ')[1];
+    if (!token) {
+      res.send({
+        success: false,
+        msg: '토큰 X',
+      });
+    }
+    if (!uSeq) {
+      res.send({
+        success: false,
+        msg: '로그인X or 비정상적인 접근',
+      });
+      return;
+    }
 
-    // const user = await jwt.verify(token);
-    // const uSeq = user.uSeq;
-    // const userInfo = await User.findOne({
-    //   where: { uSeq },
-    // });
-    // const { uName } = userInfo;
-
-    // const gSeqs = await GroupUser.findAll({
-    //   where: { uSeq },
-    // });
+    const user = await jwt.verify(token);
+    const uSeq = user.uSeq;
+    const userInfo = await User.findOne({
+      where: { uSeq },
+    });
+    const { uName } = userInfo;
 
     // 1. 유저 로그인 : 유저 토큰 - uSeq로 가입된 모임에 모두 입장!
     // 2. 해당 모임 클릭시 : gSeq - 모임별 채팅방 대화 목록.

@@ -20,6 +20,28 @@ dotenv.config({ path: __dirname + '/config/.env' });
 // 미리 설정한 sequelize 불러오기
 const db = require('./models/index');
 
+// Redis 세팅
+const redis = require('redis');
+const redisClient = redis.createClient({
+  url: `redis://${process.env.REDIS_USERNAME}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}/0`,
+  legacyMode: true, // v4버전은 promise 객체기반이므로, 옛날문법과의 호환성을 위해 설정.
+});
+
+redisClient.on('connect', () => {
+  console.info('Redis connected!');
+});
+redisClient.on('error', (err) => {
+  console.error('Redis Client Error', err);
+});
+
+// redis를 미들웨어로 설정하여 전역에서 사용하기 위한 설정.
+app.use((req, res, next) => {
+  redisClient.connect().then();
+  const redisCli = redisClient.v4;
+  req.redisCli = redisCli;
+  next();
+});
+
 // 세션
 const session = require('express-session');
 
