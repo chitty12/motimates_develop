@@ -10,7 +10,7 @@ const config_kakao = {
         color: '#000000',
         fontSize: '1rem',
         fontWeight: 'bold',
-        margin: '0.5rem auto',
+        margin: '1rem auto',
         width: '90%',
         alignItems: 'center',
         display: 'flex',

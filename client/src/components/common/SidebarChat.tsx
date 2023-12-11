@@ -7,6 +7,8 @@ import io from 'socket.io-client';
 // import { socketStorage } from '../redux/action';
 
 import '../../styles/scss/layout/sidebarChat.scss';
+import ChatRoom from './chat/ChatRoom';
+import ChatList from './chat/ChatList';
 
 // export const socket = socketIo(String(process.env.REACT_APP_BACK_URL), {
 //     withCredentials: true,
@@ -121,50 +123,70 @@ export default function SidebarChat() {
         //   });
     }, []);
 
+    const [isEnter, setIsEnter] = useState(false);
+
+    const enterChatRoom = () => {
+        console.log('isEnter', isEnter);
+        setIsEnter(true);
+    };
+
+    const leaveHandler = () => {
+        console.log('isEnter', isEnter);
+
+        setIsEnter(false);
+    };
+
     return (
         <div className="chat-container">
             {/* <div className="title3 title-wrapper">채팅</div> */}
             {/* 가입한 모임의 그룹 채팅방 리스트 */}
-            <div>
-                <button onClick={onSocket}>socket 통신 시작</button>
-                <ul>
-                    <li className="group-list">
-                        <div>1 모임</div>
-                        <div>메세지 4개 도착</div>
-                    </li>
-                    <li className="group-list">
-                        <div>2 모임</div>
-                        <div>메세지 4개 도착</div>
-                    </li>
-                    <li className="group-list">
-                        <div>3 모임</div>
-                        <div>메세지 4개 도착</div>
-                    </li>
-                    <li className="group-list">
-                        <div>4 모임</div>
-                        <div>메세지 4개 도착</div>
-                    </li>
-                </ul>
-            </div>
-            <div>===============</div>
-            <div>아래는 그룹 채팅방 클릭 시, 보이는 화면입니다.</div>
-            <div>현재 컬러는 구분을 위해 임의 지정</div>
-            <main className="chat-box">
-                <div className="chat-list"></div>
-                <select id="group-list"></select> 모임
-                {/* 메세지 전송 영역*/}
-                <div className="input-container">
-                    <input
-                        type="text"
-                        id="message"
-                        // onKeyPress="if(window.event.keyCode==13){send()}"
-                        onChange={(e) => handleChangeMsg(e.target.value)}
-                    />
-                    <button id="send-btn" type="button" onClick={send}>
-                        전송
-                    </button>
+            {/* [추후] map 돌리기 */}
+
+            {!isEnter ? (
+                <div>
+                    <button onClick={onSocket}>socket 통신 시작</button>
+                    <ul>
+                        채팅방을 클릭해주세요
+                        <li className="group-list" onClick={enterChatRoom}>
+                            <div className="group-name">1 모임</div>
+                            <div>메세지 4개 도착</div>
+                        </li>
+                        <li className="group-list" onClick={enterChatRoom}>
+                            <div className="group-name">2 모임</div>
+                            <div>메세지 4개 도착</div>
+                        </li>
+                        <li className="group-list" onClick={enterChatRoom}>
+                            <div className="group-name">3 모임</div>
+                            <div>메세지 4개 도착</div>
+                        </li>
+                        <li className="group-list" onClick={enterChatRoom}>
+                            <div className="group-name">4 모임</div>
+                            <div>메세지 4개 도착</div>
+                        </li>
+                    </ul>
                 </div>
-            </main>
+            ) : (
+                <main className="chat-box">
+                    <button id="send-btn" type="button" onClick={leaveHandler}>
+                        나가기
+                    </button>
+                    <div className="chat-list"></div>
+                    <select id="group-list"></select> 모임
+                    {/* 메세지 전송 영역*/}
+                    <div className="input-container">
+                        <input
+                            type="text"
+                            id="message"
+                            // onKeyPress="if(window.event.keyCode==13){send()}"
+                            onChange={(e) => handleChangeMsg(e.target.value)}
+                        />
+                        <button id="send-btn" type="button" onClick={send}>
+                            전송
+                        </button>
+                    </div>
+                </main>
+            )}
+            {/* <ChatRoom /> */}
         </div>
     );
 }
