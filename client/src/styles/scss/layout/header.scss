@@ -146,6 +146,15 @@
     margin-left: 1.2rem;
 }
 
+.menu {
+    .css-1s03nl2-MuiButtonBase-root-MuiButton-root {
+        // background-color: $color-gray3;
+        color: $color-gray8;
+        border: 1px solid $color-gray3;
+        // border: 1px solid ;
+    }
+}
+
 .myPage-btn {
     margin-left: 0.5rem;
     border-radius: 50%;
@@ -171,6 +180,15 @@
 
 .mypage-icon-container {
     cursor: pointer;
+}
+
+.main-active {
+    color: black;
+}
+
+.menu-list-btn {
+    display: flex;
+    flex-direction: row;
 }
 
 #chat-btn {

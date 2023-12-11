@@ -125,29 +125,7 @@ export default function Header(props: any) {
             });
     };
 
-    //=== 기존 코드 ===
-    // var tabsNewAnim = $('#navbar-animmenu');
-    // var selectorNewAnim = $('#navbar-animmenu').find('li').length;
-
-    // var activeItemNewAnim = tabsNewAnim.find('.active');
-    // var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-    // var itemPosNewAnimLeft = activeItemNewAnim.position();
-    // $('.hori-selector').css({
-    //     left: itemPosNewAnimLeft.left + 'px',
-    //     width: activeWidthNewAnimWidth + 'px',
-    // });
-
-    // $('#navbar-animmenu').on('click', 'li', function (e) {
-    //     $('#navbar-animmenu ul li').removeClass('active');
-    //     $(this).addClass('active');
-    //     var activeWidthNewAnimWidth = $(this).innerWidth();
-    //     var itemPosNewAnimLeft = $(this).position();
-    //     $('.hori-selector').css({
-    //         left: itemPosNewAnimLeft.left + 'px',
-    //         width: activeWidthNewAnimWidth + 'px',
-    //     });
-    // });
-
+    //--기존 코드
     // const [activeTab, setActiveTab] = useState<string>(' ');
 
     // useEffect(() => {
@@ -177,6 +155,16 @@ export default function Header(props: any) {
     //         });
     //     }
     // }, []);
+
+    const [isActive, setIsActive] = useState('main');
+
+    const mainActiveHandler = () => {
+        setIsActive('main');
+    };
+
+    const groupActiveHandler = () => {
+        setIsActive('group');
+    };
 
     return (
         <>
@@ -221,23 +209,55 @@ export default function Header(props: any) {
                                         <div className="left"></div>
                                         <div className="right"></div>
                                     </div>
-                                    {!props.isIntro ? (
-                                        <li>
-                                            <Link to="/main">Main</Link>
-                                        </li>
+                                    {props.isIntro || props.isLogin ? (
+                                        <div className="menu-list-btn">
+                                            <li onClick={mainActiveHandler}>
+                                                <Link
+                                                    to="/main"
+                                                    style={{ color: 'black' }}
+                                                >
+                                                    Main
+                                                </Link>
+                                            </li>
+                                            <li onClick={groupActiveHandler}>
+                                                <Link
+                                                    to="/group"
+                                                    style={{ color: 'black' }}
+                                                >
+                                                    Group
+                                                </Link>
+                                            </li>
+                                        </div>
                                     ) : (
-                                        <li>
-                                            <Link
-                                                to="/main"
-                                                style={{ color: 'black' }}
-                                            >
-                                                Main
-                                            </Link>
-                                        </li>
+                                        <div className="menu-list-btn">
+                                            <li onClick={mainActiveHandler}>
+                                                <Link
+                                                    to="/main"
+                                                    style={{
+                                                        color:
+                                                            isActive === 'main'
+                                                                ? 'black'
+                                                                : '',
+                                                    }}
+                                                >
+                                                    Main
+                                                </Link>
+                                            </li>
+                                            <li onClick={groupActiveHandler}>
+                                                <Link
+                                                    to="/group"
+                                                    style={{
+                                                        color:
+                                                            isActive === 'group'
+                                                                ? 'black'
+                                                                : '',
+                                                    }}
+                                                >
+                                                    Group
+                                                </Link>
+                                            </li>
+                                        </div>
                                     )}
-                                    <li className="active">
-                                        <Link to="/group">Group</Link>
-                                    </li>
                                 </ul>
                             </div>
 
