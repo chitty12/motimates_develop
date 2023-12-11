@@ -183,7 +183,7 @@ export default function Intro(props: any) {
         };
 
         setInterval(draw, 40);
-    }, []); // 두 번째 매개변수로 빈 배열을 전달하여 최초 렌더링 시에만 useEffect가 실행되도록 설정
+    }, []);
 
     //색종이 커스터마이징
     const handleClick = () => {
@@ -270,21 +270,6 @@ export default function Intro(props: any) {
             </div>
 
             <div className="empty-div"></div>
-
-            <div className="char-img">
-                <img src="/asset/images/rab1.svg" alt="" />
-                <img src="/asset/images/rab2.svg" alt="" />
-                <img src="/asset/images/rab3.svg" alt="" />
-            </div>
-            <div className="intro-content">
-                <div className="start-group-title">
-                    귀여운 캐릭터의 표정이 변해요 !
-                </div>
-                <br />
-                <div className="intro-content-sub-title">
-                    달성률에 따라 캐릭터가 웃을 수도, 울 수도 있어요 ~ 😆 🙂 😭
-                </div>
-            </div>
 
             <div className="wrapper">
                 <div className="debate-video">
@@ -374,6 +359,21 @@ export default function Intro(props: any) {
             </div>
 
             <div className="empty-div"></div>
+
+            <div className="char-img">
+                <img src="/asset/images/rab1.svg" alt="" />
+                <img src="/asset/images/rab2.svg" alt="" />
+                <img src="/asset/images/rab3.svg" alt="" />
+            </div>
+            <div className="intro-content">
+                <div className="start-group-title">
+                    캐릭터의 표정이 변해요 !
+                </div>
+                <br />
+                <div className="intro-content-sub-title">
+                    달성률에 따라 캐릭터가 웃을 수도, 울 수도 있어요 ~ 😆 🙂 😭
+                </div>
+            </div>
             <div className="custom-cursor "></div>
 
             <div className="story-wrapper">
