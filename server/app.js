@@ -36,7 +36,7 @@ redisClient.on('error', (err) => {
 
 // redis를 미들웨어로 설정하여 전역에서 사용하기 위한 설정.
 app.use((req, res, next) => {
-  redisClient.connect().then();
+  // redisClient.connect().then();
   const redisCli = redisClient.v4;
   req.redisCli = redisCli;
   next();
