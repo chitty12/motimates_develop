@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>그룹 채팅</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>채팅</h1>
+    <ul id="messages"></ul>
+    <input
+      type="text"
+      id="message"
+      autocomplete="on"
+      onkeypress="if(window.event.keyCode==13){sendMessage()}"
+    />
+    <button onclick="sendMessage();">보내기</button>
+
+    <script>
+      // 1부터 5까지의 난수 생성
+      function getRandomNumber(min, max) {
+        // Math.random()은 0 이상 1 미만의 난수를 반환하므로
+        // 원하는 범위에 맞게 변환합니다.
+        const range = max - min + 1;
+        return Math.floor(Math.random() * range) + min;
+      }
+      const randomNum = getRandomNumber(1, 2);
+
+      const messages = document.getElementById('messages');
+      const messageInput = document.getElementById('message');
+      const messageButton = document.querySelector('button');
+
+      // 메시지 전송
+      function sendMessage() {
+        socket.emit('chatMessage', messageInput.value);
+        console.log('messageInput.value ::: ', messageInput.value);
+        messageInput.value = '';
+      }
+
+      const uSeq = randomNum;
+      const gSeq = randomNum;
+      const data = {
+        uSeq,
+        uName: 'Test 유저',
+        gName: '임시 모임',
+        gSeq,
+      };
+
+      let isConnected = false;
+
+      // 로컬
+      const socket = io.connect(`http://localhost:8888/api/socket/chat`);
+      // 배포
+      // const socket = io.connect('http://13.124.147.68:7777');
+
+      socket.on('connect', () => {
+        if (!isConnected) {
+          console.log('클라이언트 연결 완료 ::: ', socket.id);
+          isConnected = true;
+        }
+        // const cookie = new Cookies();
+        // const uToken = cookie.get('isUser'); // 토큰 값
+        // console.log(uToken);
+        // socket.emit('login', data);
+      });
+
+      socket.on('disconnect', () => {
+        console.log(isConnected);
+        console.log('클라이언트 연결이 끊어짐.');
+        isConnected = false;
+      });
+
+      // socket.on('error', (data) => {
+      //   alert(data.msg);
+      // });
+
+      // socket.on('message', (msg) => {
+      //   console.log(msg);
+      //   const li = document.createElement('li');
+      //   li.textContent = msg;
+      //   messages.appendChild(li);
+      // });
+    </script>
+  </body>
+</html>
