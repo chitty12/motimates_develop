@@ -10,6 +10,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import '../../styles/scss/layout/header.scss';
 
 export default function Header(props: any) {
+    const [isCookie, setIsCookie] = useState(false); // 쿠키 유무
+
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser'); // 토큰 값
+
     const theme = createTheme({
         palette: {
             primary: {
@@ -32,11 +37,6 @@ export default function Header(props: any) {
             setIsVisibleMobile((prev) => !prev);
         }
     };
-
-    const [isCookie, setIsCookie] = useState(false); // 쿠키 유무
-
-    const cookie = new Cookies();
-    const uToken = cookie.get('isUser'); // 토큰 값
 
     useEffect(() => {
         if (cookie.get('isUser')) {
@@ -125,6 +125,59 @@ export default function Header(props: any) {
             });
     };
 
+    //=== 기존 코드 ===
+    // var tabsNewAnim = $('#navbar-animmenu');
+    // var selectorNewAnim = $('#navbar-animmenu').find('li').length;
+
+    // var activeItemNewAnim = tabsNewAnim.find('.active');
+    // var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+    // var itemPosNewAnimLeft = activeItemNewAnim.position();
+    // $('.hori-selector').css({
+    //     left: itemPosNewAnimLeft.left + 'px',
+    //     width: activeWidthNewAnimWidth + 'px',
+    // });
+
+    // $('#navbar-animmenu').on('click', 'li', function (e) {
+    //     $('#navbar-animmenu ul li').removeClass('active');
+    //     $(this).addClass('active');
+    //     var activeWidthNewAnimWidth = $(this).innerWidth();
+    //     var itemPosNewAnimLeft = $(this).position();
+    //     $('.hori-selector').css({
+    //         left: itemPosNewAnimLeft.left + 'px',
+    //         width: activeWidthNewAnimWidth + 'px',
+    //     });
+    // });
+
+    // const [activeTab, setActiveTab] = useState<string>(' ');
+
+    // useEffect(() => {
+    //     const tabsNewAnim = document.getElementById('navbar-animmenu');
+
+    //     if (tabsNewAnim) {
+    //         const horiSelector = document.querySelector(
+    //             '.hori-selector'
+    //         ) as HTMLElement;
+
+    //         tabsNewAnim.addEventListener('click', function (e) {
+    //             const target = e.target as HTMLElement;
+
+    //             if (target.tagName === 'A') {
+    //                 const clickedTab = target.innerText;
+
+    //                 setActiveTab(clickedTab);
+
+    //                 const allTabs = tabsNewAnim?.querySelectorAll('ul li');
+
+    //                 allTabs?.forEach(function (tab) {
+    //                     tab.classList.remove('active');
+    //                 });
+
+    //                 target.parentElement?.classList.add('active');
+    //             }
+    //         });
+    //     }
+    // }, []);
+
     return (
         <>
             <div className="header-blur">
@@ -145,25 +198,50 @@ export default function Header(props: any) {
 
                     <div className="header-divTwo pcMode">
                         <nav className="header-nav ">
-                            <ThemeProvider theme={theme}>
-                                <input
-                                    type="text"
-                                    id="grpSearch-input"
-                                    value={grpInput}
-                                    placeholder="초대 링크를 넣어보세요"
-                                    onChange={(
-                                        e: React.ChangeEvent<HTMLInputElement>
-                                    ) => setGrpInput(e.target.value)}
-                                />
-                                <img
-                                    src="/asset/icons/search.svg"
-                                    id="grpSearch-btn"
-                                    onClick={(e: React.MouseEvent) =>
-                                        goInvited()
-                                    }
-                                    alt="search"
-                                ></img>
-                                <ButtonGroup
+                            {/* <ThemeProvider theme={theme}> */}
+                            <input
+                                type="text"
+                                id="grpSearch-input"
+                                value={grpInput}
+                                placeholder="초대 링크를 넣어보세요"
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                ) => setGrpInput(e.target.value)}
+                            />
+                            <img
+                                src="/asset/icons/search.svg"
+                                id="grpSearch-btn"
+                                onClick={(e: React.MouseEvent) => goInvited()}
+                                alt="search"
+                            ></img>
+
+                            <div id="navbar-animmenu">
+                                <ul className="show-dropdown main-navbar">
+                                    <div className="hori-selector">
+                                        <div className="left"></div>
+                                        <div className="right"></div>
+                                    </div>
+                                    {!props.isIntro ? (
+                                        <li>
+                                            <Link to="/main">Main</Link>
+                                        </li>
+                                    ) : (
+                                        <li>
+                                            <Link
+                                                to="/main"
+                                                style={{ color: 'black' }}
+                                            >
+                                                Main
+                                            </Link>
+                                        </li>
+                                    )}
+                                    <li className="active">
+                                        <Link to="/group">Group</Link>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            {/* <ButtonGroup
                                     aria-label="outlined button group"
                                     variant="outlined"
                                     sx={{ p: 1 }}
@@ -178,22 +256,24 @@ export default function Header(props: any) {
                                         <Button className="menu-button">
                                             GROUP
                                         </Button>
-                                    </Link>
-                                    {/* </li> */}
-                                    {/* 관리자만 보이는 버튼 */}
-                                    {/* <Link to="/management/users">
+                                    </Link> */}
+                            {/* </li> */}
+                            {/* 관리자만 보이는 버튼 */}
+                            {/* <Link to="/management/users">
                                     <Button className="menu-button">
                                         Management
                                     </Button>
                                 </Link> */}
-                                </ButtonGroup>
-                            </ThemeProvider>
+                            {/* </ButtonGroup> */}
+                            {/* </ThemeProvider> */}
 
                             <ul className="menu">
                                 {!isCookie ? (
                                     <li>
                                         {/* 비로그인 시 */}
                                         <ThemeProvider theme={theme}>
+                                            {/* <Link to="/login">Login</Link> */}
+
                                             <Link to="/login">
                                                 <Button
                                                     aria-label="outlined button group"
