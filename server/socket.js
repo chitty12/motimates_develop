@@ -22,8 +22,13 @@ exports.setupSocket = (server, options) => {
   groupChat.on('connection', (socket) => {
     // 클라이언트 소켓의 고유한 ID를 가져옴
     const socketId = socket.id;
-    console.log(socket);
+    // console.log(socket);
+
     console.log(`/api/socket/chat 네임스페이스 연결 완료 ::: `, socketId);
+
+    socket.emit('send', 'connect!!!!!!!!');
+
+    socket.on('hi', (data) => console.log(data.message));
 
     // 이미 연결된 소켓인지 확인
     if (connectedSockets.has(socketId)) {

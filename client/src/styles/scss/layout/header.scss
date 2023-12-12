@@ -22,9 +22,11 @@
     transition: all 1s;
     width: 100%;
     justify-content: flex-end;
+
     @include media('<800px') {
-        display: none;
+        // display: none;
         flex-direction: column;
+        display: grid;
     }
 }
 
@@ -49,14 +51,21 @@
         margin-top: 5rem;
     }
 }
+
 .pcMode {
     display: flex;
     @include media('<800px') {
         display: none;
     }
 }
+
 .mobMode {
     display: none;
+
+    @include media('<800px') {
+        display: grid !important;
+        flex-direction: column !important;
+    }
 }
 
 .logo-text {

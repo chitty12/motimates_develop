@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
+// import { socket } from '../SidebarChat';
+
 export default function ChatList({
     isEnter,
     setIsEnter,
@@ -66,9 +68,7 @@ export default function ChatList({
     return (
         <ul>
             채팅방을 클릭해주세요
-            {/* 가입한 모임의 그룹 채팅방 리스트 */}
-            {/* [추후] map 돌리기 */}
-            {madeGroupInfo.map((group: any, idx: number) => {
+            {madeGroupInfo?.map((group: any, idx: number) => {
                 return (
                     <li
                         className="group-list"
@@ -83,7 +83,7 @@ export default function ChatList({
                     </li>
                 );
             })}
-            {madeJoinInfo.map((group: any, idx: number) => {
+            {madeJoinInfo?.map((group: any, idx: number) => {
                 return (
                     <li
                         className="group-list"
