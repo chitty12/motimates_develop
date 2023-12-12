@@ -16,6 +16,9 @@ const jwt = require('../modules/jwt');
 exports.getGroupChats = async (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
+    const user = await jwt.verify(token);
+    const uSeq = user.uSeq;
+
     if (!token) {
       res.send({
         success: false,
@@ -30,10 +33,7 @@ exports.getGroupChats = async (req, res) => {
       return;
     }
 
-    const user = await jwt.verify(token);
-    const uSeq = user.uSeq;
-
-    // req.data = gSeq, uName
+    // (req.data = gSeq), uName;
 
     // 1. 유저 로그인 : 유저 토큰 - uSeq로 가입된 모임에 모두 입장!
     // 2. 해당 모임 클릭시 : gSeq - 모임별 채팅방 대화 목록.

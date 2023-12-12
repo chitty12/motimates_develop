@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
+import axios from 'axios';
+
 // import { createContext } from 'react';
 
 // import { useDispatch } from 'react-redux';
@@ -15,178 +17,139 @@ import ChatList from './chat/ChatList';
 // });
 // export const SocketContext = createContext(socket);
 
-let interval = 3000;
+//-- 토큰 인증하여 서버 연결
+// API 뒤에 오는 Id 값으로 namespace 구분이 된다. ▶️ io('API주소/Id값')
+
+// const socket = io('http://localhost:8888/api/socket/chat');
+// `${process.env.REACT_APP_DB_HOST}/socket/chat`,
+
+// export const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`, {
+// export const socket = io('http://localhost:8888/api/socket/chat');
+
+// io(`${process.env.REACT_APP_DB_HOST}/socket/chat`, {
+//     headers: {
+//         Authorization: `Bearer ${uToken}`,
+//     },
+// });
 
 export default function SidebarChat() {
-    const [chat, setChat] = useState<any>([]); // 받아올 채팅 1️⃣
-    const [sendMsg, setSendMsg] = useState(''); // 입력한 채팅 2️⃣
-
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    // useEffect(() => {
-    //     const socket = new WebSocket('http://localhost:8888/api/socket/chat');
+    const [uName, setUName] = useState(''); // 모임 번호
+    const [nowGSeq, setNowGSeq] = useState(1); // 모임 번호
+    const [nowGName, setNowGName] = useState(''); // 모임 번호
+    const [isEnter, setIsEnter] = useState(false); // 입장/나가기
 
-    //     return () => {
-    //         if (socket.readyState === 1) {
-    //             // <-- This is important
-    //             socket.close();
-    //         }
-    //     };
-    // }, []);
+    const [chat, setChat] = useState<any>([]); // 받아올 채팅 1️⃣
+    const [sendMsg, setSendMsg] = useState(''); // 입력한 채팅 2️⃣
 
-    const socket = io('http://localhost:8888/api/socket/chat');
-    // `${process.env.REACT_APP_DB_HOST}/socket/chat`,
+    // const [message, setMessage] = useState<string>('');
 
-    // useEffect(() => {
-    const onSocket = () => {
-        // setInterval(() => {
-        // socket.emit('good', '클라이언트 -> 서버');
-        // }, interval);
+    // const data = {
+    //     uSeq,
+    //     uName: 'Test 유저',
+    //     gName: '임시 모임',
+    //     gSeq,
+    //   };
 
-        socket.emit('send_message', { message: 'Hello' });
-
-        console.log('###########', (data: any) => console.log(data));
-
-        // socket.on('hi', (data) => console.log(data)); // 서버 -> 클라이언트
-    };
-    // }, []);
-
-    useEffect(() => {
-        socket.on('receive_message', (data) => {
-            setChat(data.message);
-        });
-    }, [socket]);
-
-    //-- 토큰 인증하여 서버 연결
-    // API 뒤에 오는 Id 값으로 namespace 구분이 된다. ▶️ io('API주소/Id값')
-    // io(`${process.env.REACT_APP_DB_HOST}/socket/chat`, {
-    //     headers: {
-    //         Authorization: `Bearer ${uToken}`,
-    //     },
-    // });
-
-    // socket.on('connect', () => {
-    //     console.log('socket server connected.');
-    // });
-
-    // socket.on('disconnect', () => {
-    //     console.log('socket server disconnected.');
-    // });
-
-    const send = () => {
-        console.log('전송');
+    // 1. 사용자 데이터 가져오기
+    const getUserData = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                // console.log('user', res.data);
+                const { nickname } = res.data;
+                setUName(nickname);
+            });
     };
 
-    //-- 입장 알림
     useEffect(() => {
-        // 이때 id는 각 경매방이 가진 고유 Id
-        // socket 연결
-        // if (!socketInstances[id]) {
-        //   socketInstances[id] = socket(`${id}`)
-        //   // 서버에서 넘어오는 alert 응답 받아오기
-        //   socketInstances[id].on('alert', (message: string) => {
-        //     const welcomeChat: ChatMsg = {
-        //       username: '알림',
-        //       message: message,
-        //     };
-        //     setChat((prevChat) => [...prevChat, welcomeChat]);
-        //  }
+        getUserData();
     }, []);
 
-    const handleChangeMsg = (message: string) => {
-        setSendMsg(message);
+    const getChat = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/socket/chat`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+
+                socket.on('connect', () => {
+                    console.log('socket server connected.');
+                });
+
+                // 닉네임 서버에 전송
+                socket.emit('setName', uName);
+            });
     };
 
-    //-- 입력한 채팅을 서버 측으로 보내는 소켓 이벤트 함수
-    // const handleSendMsg = () => {
-    //     socketInstances[id].emit('chat', {
-    //         message: sendMsg,
-    //     });
-    //     setSendMsg('');
+    useEffect(() => {
+        getChat();
+    }, []);
+
+    const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+    // const socket = io('http://localhost:8888/api/socket/chat');
+
+    socket.on('connect', () => {
+        console.log('socket server connected.');
+    });
+
+    // [추후] 로그아웃 시
+    socket.on('disconnect', () => {
+        console.log('socket server disconnected.');
+    });
+
+    // socket.on('message', function (message: string) {
+    //     console.log(message);
+    // });
+
+    // useEffect(() => {
+    // const onSocket = () => {
+    //     // setInterval(() => {
+    //     // socket.emit('good', '클라이언트 -> 서버');
+    //     // }, interval);
+
+    //     socket.on('hi', (data) => console.log(data)); // 서버 -> 클라이언트
+    //     socket.emit('send_message', { message: 'Hello' });
+
+    //     console.log('isConnected', isConnected);
+
+    //     console.log('###########', (data: any) => console.log(data));
     // };
-
-    //-- 채팅 받아오기
-    useEffect(() => {
-        // 방 고유 Id
-        // socket 연결
-        // if (!socketInstances[id]) {
-        //   socketInstances[id] = socket(`${id}`)
-        // 서버에서 넘어오는 chat 응답 받아오기
-        //   socketInstances[id].on('chat', (data: socketChatMsg) => {
-        //     const newChat: ChatMsg = {
-        //       username: data.userInfo.userId,
-        //       message: data.message.message,
-        //       admin: data.userInfo.isAdmin,
-        //     };
-        //     setChat((prevChat) => [...prevChat, newChat]);
-        //   });
-    }, []);
-
-    const [isEnter, setIsEnter] = useState(false);
-
-    const enterChatRoom = () => {
-        console.log('isEnter', isEnter);
-        setIsEnter(true);
-    };
-
-    const leaveHandler = () => {
-        console.log('isEnter', isEnter);
-
-        setIsEnter(false);
-    };
+    // // }, []);
 
     return (
         <div className="chat-container">
-            {/* <div className="title3 title-wrapper">채팅</div> */}
-            {/* 가입한 모임의 그룹 채팅방 리스트 */}
-            {/* [추후] map 돌리기 */}
-
+            <div>{uName} 님</div>
             {!isEnter ? (
                 <div>
-                    <button onClick={onSocket}>socket 통신 시작</button>
-                    <ul>
-                        채팅방을 클릭해주세요
-                        <li className="group-list" onClick={enterChatRoom}>
-                            <div className="group-name">1 모임</div>
-                            <div>메세지 4개 도착</div>
-                        </li>
-                        <li className="group-list" onClick={enterChatRoom}>
-                            <div className="group-name">2 모임</div>
-                            <div>메세지 4개 도착</div>
-                        </li>
-                        <li className="group-list" onClick={enterChatRoom}>
-                            <div className="group-name">3 모임</div>
-                            <div>메세지 4개 도착</div>
-                        </li>
-                        <li className="group-list" onClick={enterChatRoom}>
-                            <div className="group-name">4 모임</div>
-                            <div>메세지 4개 도착</div>
-                        </li>
-                    </ul>
+                    {/* <button onClick={onSocket}>socket 통신 시작</button> */}
+
+                    <ChatList
+                        isEnter={isEnter}
+                        setIsEnter={setIsEnter}
+                        setNowGSeq={setNowGSeq}
+                        setNowGName={setNowGName}
+                    />
                 </div>
             ) : (
-                <main className="chat-box">
-                    <button id="send-btn" type="button" onClick={leaveHandler}>
-                        나가기
-                    </button>
-                    <div className="chat-list"></div>
-                    <select id="group-list"></select> 모임
-                    {/* 메세지 전송 영역*/}
-                    <div className="input-container">
-                        <input
-                            type="text"
-                            id="message"
-                            // onKeyPress="if(window.event.keyCode==13){send()}"
-                            onChange={(e) => handleChangeMsg(e.target.value)}
-                        />
-                        <button id="send-btn" type="button" onClick={send}>
-                            전송
-                        </button>
-                    </div>
-                </main>
+                <ChatRoom
+                    isEnter={isEnter}
+                    setIsEnter={setIsEnter}
+                    sendMsg={sendMsg}
+                    setSendMsg={setSendMsg}
+                    nowGSeq={nowGSeq}
+                    nowGName={nowGName}
+                />
             )}
-            {/* <ChatRoom /> */}
         </div>
     );
 }
