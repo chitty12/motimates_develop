@@ -32,6 +32,8 @@ import ChatList from './chat/ChatList';
 //     },
 // });
 
+let socketInstance: any = null;
+
 export default function SidebarChat() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
@@ -72,40 +74,57 @@ export default function SidebarChat() {
         getUserData();
     }, []);
 
-    const getChat = async () => {
-        const res = await axios
-            .get(`${process.env.REACT_APP_DB_HOST}/socket/chat`, {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            })
-            .then((res) => {
-                console.log(res.data);
+    // 2. socket
+    // if (!socketInstance) {
+    //     socketInstance = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`, {
+    //         path: '/wapi/socket.io',
+    //         withCredentials: true,
+    //     });
+    // }
 
-                socket.on('connect', () => {
-                    console.log('socket server connected.');
-                });
+    // if (!socketInstance) {
+    // socketInstance = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+    // }
 
-                // 닉네임 서버에 전송
-                socket.emit('setName', uName);
-            });
-    };
-
-    useEffect(() => {
-        getChat();
-    }, []);
-
-    const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+    // const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
     // const socket = io('http://localhost:8888/api/socket/chat');
 
-    socket.on('connect', () => {
-        console.log('socket server connected.');
-    });
+    // const getChat = async () => {
+    //     const res = await axios
+    //         .get(`${process.env.REACT_APP_DB_HOST}/socket/chat`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         })
+    //         .then((res) => {
+    //             console.log(res.data);
 
-    // [추후] 로그아웃 시
-    socket.on('disconnect', () => {
-        console.log('socket server disconnected.');
-    });
+    //             socket.on('connection', (data) => {
+    //                 console.log('socket server connected.');
+    //                 console.log(data);
+    //             });
+
+    //             // 닉네임 서버에 전송
+    //             socket.emit('setName', uName);
+    //         });
+    // };
+
+    // useEffect(() => {
+    //     getChat();
+    // }, []);
+
+    useEffect(() => {
+        const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+
+        socket.on('connect', () => {
+            console.log('클라이언트 연결 완료 ::', socket.id);
+        });
+
+        socket.on('send', (data) => {
+            console.log('socket server connected.');
+            console.log('socket server connected.', data);
+        });
+    }, []);
 
     // socket.on('message', function (message: string) {
     //     console.log(message);
@@ -117,18 +136,17 @@ export default function SidebarChat() {
     //     // socket.emit('good', '클라이언트 -> 서버');
     //     // }, interval);
 
-    //     socket.on('hi', (data) => console.log(data)); // 서버 -> 클라이언트
-    //     socket.emit('send_message', { message: 'Hello' });
+    //     socket.on('send', (data) => console.log(data)); // 서버 -> 클라이언트
 
-    //     console.log('isConnected', isConnected);
+    //     socket.emit('hi', { message: 'Hello' });
 
-    //     console.log('###########', (data: any) => console.log(data));
+    //     console.log('###########');
     // };
     // // }, []);
 
     return (
         <div className="chat-container">
-            <div>{uName} 님</div>
+            {/* <div onClick={onSocket}>{uName} 님</div> */}
             {!isEnter ? (
                 <div>
                     {/* <button onClick={onSocket}>socket 통신 시작</button> */}

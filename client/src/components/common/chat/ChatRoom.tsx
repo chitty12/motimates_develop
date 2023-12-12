@@ -18,12 +18,12 @@ export default function ChatRoom({
 
     const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
 
-    useEffect(() => {
-        // 컴포넌트가 마운트되었을 때 실행되는 코드
-        socket.on('message', (data: string) => {
-            setSendMsg(data);
-        });
-    }, []);
+    // useEffect(() => {
+    //     // 컴포넌트가 마운트되었을 때 실행되는 코드
+    //     socket.on('message', (data: string) => {
+    //         setSendMsg(data);
+    //     });
+    // }, []);
 
     const leaveHandler = () => {
         setIsEnter(false);

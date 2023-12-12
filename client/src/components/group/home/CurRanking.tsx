@@ -41,7 +41,7 @@ export default function CurRanking({
 
                                     <Progressbar
                                         score={nowScoreRanking[idx]}
-                                        bg={'white'}
+                                        bg={'#e0e0e0'}
                                     />
                                 </div>
                             </li>

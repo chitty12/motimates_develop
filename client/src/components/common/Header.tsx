@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
+import { io } from 'socket.io-client';
 
 import { grey } from '@mui/material/colors';
 import { Button, ButtonGroup, Divider } from '@mui/material';
@@ -15,6 +16,14 @@ export default function Header(props: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
 
+    const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+
+    useEffect(() => {
+        if (cookie.get('isUser')) {
+            setIsCookie(true);
+        } else setIsCookie(false);
+    }, [cookie]);
+
     const theme = createTheme({
         palette: {
             primary: {
@@ -26,9 +35,10 @@ export default function Header(props: any) {
 
     // 리사이즈 이벤트에 따라 너비값 측정
     const [myWidth, setMyWidth] = useState<number>(window.innerWidth);
-    window.onresize = () => {
-        setMyWidth(window.innerWidth);
-    };
+
+    // window.onresize = () => {
+    //     setMyWidth(window.innerWidth);
+    // };
 
     // 헤더 메뉴 보여주기
     const [isVisibleMobile, setIsVisibleMobile] = useState<boolean>(true);
@@ -38,17 +48,59 @@ export default function Header(props: any) {
         }
     };
 
-    useEffect(() => {
-        if (cookie.get('isUser')) {
-            setIsCookie(true);
-        } else setIsCookie(false);
-    }, [cookie]);
+    // useEffect(() => {
+    //     const handleResize = (): void => {
+    //         setMyWidth(window.innerWidth);
+    //     };
+
+    //     // 컴포넌트가 마운트되었을 때 리사이즈 이벤트 리스너 추가
+    //     window.addEventListener('resize', handleResize);
+
+    //     // 컴포넌트가 언마운트되면 리사이즈 이벤트 리스너 제거
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize);
+    //     };
+    // }, []); // 빈 배열을 전달하여 마운트 및 언마운트 시에만 실행되도록 함
+
+    // const getChat = async () => {
+    //     const res = await axios
+    //         .get(`${process.env.REACT_APP_DB_HOST}/socket/chat`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         })
+    //         .then((res) => {
+    //             console.log(res.data);
+
+    //             socket.emit('logout', () => {
+    //                 // socket.disconnect();
+
+    //                 console.log('socket server disconnected.');
+    //             });
+    //         });
+    // };
+
+    // useEffect(() => {
+    //     getChat();
+    // }, []);
 
     const nvg = useNavigate();
     const logoutHandler = () => {
         // [추후] 로그아웃 모달창 처리
         if (window.confirm('로그아웃하시겠습니까 ?')) {
+            // 채팅 종료
+            // socket.disconnect();
+
+            // socket.emit('logout', () => {
+            //     // socket.disconnect();
+
+            //     console.log('socket server disconnected.');
+            // });
+
+            // getChat();
+
             cookie.remove('isUser', { path: '/' });
+
             nvg('/');
         } else {
             return;
@@ -124,37 +176,6 @@ export default function Header(props: any) {
                 setGrpInput('');
             });
     };
-
-    //--기존 코드
-    // const [activeTab, setActiveTab] = useState<string>(' ');
-
-    // useEffect(() => {
-    //     const tabsNewAnim = document.getElementById('navbar-animmenu');
-
-    //     if (tabsNewAnim) {
-    //         const horiSelector = document.querySelector(
-    //             '.hori-selector'
-    //         ) as HTMLElement;
-
-    //         tabsNewAnim.addEventListener('click', function (e) {
-    //             const target = e.target as HTMLElement;
-
-    //             if (target.tagName === 'A') {
-    //                 const clickedTab = target.innerText;
-
-    //                 setActiveTab(clickedTab);
-
-    //                 const allTabs = tabsNewAnim?.querySelectorAll('ul li');
-
-    //                 allTabs?.forEach(function (tab) {
-    //                     tab.classList.remove('active');
-    //                 });
-
-    //                 target.parentElement?.classList.add('active');
-    //             }
-    //         });
-    //     }
-    // }, []);
 
     const [isActive, setIsActive] = useState('main');
 
@@ -368,7 +389,7 @@ export default function Header(props: any) {
 
                 {/* 모바일일 때 메뉴 바*/}
                 <div
-                    className="header-divTwo mobMode "
+                    className="header-divTwo mobMode"
                     style={{
                         display:
                             isVisibleMobile && myWidth < 800 ? 'flex' : 'none',
