@@ -18,7 +18,7 @@ exports.getGroupChats = async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const user = await jwt.verify(token);
     const uSeq = user.uSeq;
-
+    
     if (!token) {
       res.send({
         success: false,
@@ -33,11 +33,8 @@ exports.getGroupChats = async (req, res) => {
       return;
     }
 
-    // (req.data = gSeq), uName;
-
     // 1. 유저 로그인 : 유저 토큰 - uSeq로 가입된 모임에 모두 입장!
-    // 2. 해당 모임 클릭시 : gSeq - 모임별 채팅방 대화 목록.
-    // 3. 유저 로그아웃 : 모임 채팅방에서 disconnect
+    // req.data = gSeq, uName
 
     const connectedUser = {}; // 연결된 클라이언트를 저장할 객체
     const io = req.io;
@@ -66,57 +63,46 @@ exports.getGroupChats = async (req, res) => {
 
       // 새로운 소켓을 연결된 소켓 목록에 추가
       connectedSockets.add(socketId);
+      const userInfo = {
+        uSeq,
+        uName,
+      };
+
+      connectedUser[socketId] = userInfo;
+      //  connectedUser = {
+      //   "someSocketId": {
+      //     uSeq: 'someUserId',
+      //     uName: 'someUserName',
+      //   }
+      // };
 
       // 연결 이벤트 핸들러
       console.log(`Socket ${socketId} connected.`);
 
-      const rooms = ['room1', 'room2', 'room3']; // user가 참여하고 있는 모임의 gSeq
-
-      // 다른 이벤트 핸들러 등록 가능
-      // 각 모임방에 notice + 입장
-      io.emit('login', () => {
-        console.log(`${socketId}가 로그인하셨습니다.`);
+      socket.on('setName', (uName) => {
+        console.log(uName);
+        groupChat.emit('notice', `${uName}님이 Motimates에 로그인했습니다.`);
       });
+
+      const rooms = ['room1', 'room2', 'room3']; // user가 참여하고 있는 모임의 gSeq
 
       rooms.forEach((room) => {
         socket.join(room);
+      });
+
+      socket.on('logout', () => {
+        console.log('logout');
+        socket.disconnect();
       });
 
       // 연결이 끊어질 때 연결된 소켓 목록에서 제거
       // 각 모임방에 notice
       socket.on('disconnect', () => {
         console.log(`Socket ${socketId} disconnected.`);
-        io.emit('notice', `${socketId}님이 로그아웃하셨습니다.`);
+        groupChat.emit('notice', `${socketId}님이 로그아웃하셨습니다.`);
         connectedSockets.delete(socketId);
       });
     });
-
-    //   //   // 클라이언트에서 로그인 이벤트를 보내면, 연결을 저장하고 해당 연결을 사용
-    //   //   if (!connectedUser[uSeq]) {
-    //   //     connectedUser[uSeq] = socket.id;
-    //   //     socket.name = uName;
-    //   //     socket.roomName = gName;
-    //   //     socket.roomNumber = gSeq;
-    //   //     // 소켓에 들어오게 되면 자동으로 모임 채팅에 참여함
-    //   //     socket.join(socket.roomNumber);
-    //   //     console.log(socket.roomName, ' -- ', socket.roomNumber);
-    //   //     console.log('연결된 유저 목록 ::::::', connectedUser);
-
-    //   //   } else {
-    //   //     // 이미 연결이 있는 경우, 기존 연결을 사용하고 새 연결을 닫음
-    //   //     socket.disconnect();
-    //   //   }
-    //   // });
-
-    //   // socket.on('chatMessage', (message) => {
-    //   //   console.log(message);
-    //   //   req.io
-    //   //     .to(socket.roomNumber)
-    //   //     .emit('message', `${socket.name} : ` + message); // 모든 클라이언트에 메시지를 전송
-    //   // });
-    // });
-
-    // const { join } = require('node:path');
 
     res.send({ isSuccess: true, msg: 'socket start' });
   } catch (err) {
@@ -124,3 +110,48 @@ exports.getGroupChats = async (req, res) => {
     res.send({ isSuccess: false, msg: 'error' });
   }
 };
+
+// exports.postGroupChat = async (req, res) => {
+//   try {
+//     const gSeq = req.params.gSeq;
+//     const io = req.io;
+
+//     const roomChat = io.of('/api/socket/chat').in(gSeq);
+
+//     roomChat.on('connection', () => {
+//       socket.on('sendMsg', ()=> {
+
+//       });
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     res.send({
+//       isSuccess: false,
+//       msg: 'err',
+//     });
+//   }
+
+//   //   // 클라이언트에서 로그인 이벤트를 보내면, 연결을 저장하고 해당 연결을 사용
+//   //   if (!connectedUser[uSeq]) {
+//   //     connectedUser[uSeq] = socket.id;
+//   //     socket.name = uName;
+//   //     socket.roomName = gName;
+//   //     socket.roomNumber = gSeq;
+//   //     // 소켓에 들어오게 되면 자동으로 모임 채팅에 참여함
+//   //     socket.join(socket.roomNumber);
+//   //     console.log(socket.roomName, ' -- ', socket.roomNumber);
+//   //     console.log('연결된 유저 목록 ::::::', connectedUser);
+//   //   } else {
+//   //     // 이미 연결이 있는 경우, 기존 연결을 사용하고 새 연결을 닫음
+//   //     socket.disconnect();
+//   //   }
+//   // });
+//   // socket.on('chatMessage', (message) => {
+//   //   console.log(message);
+//   //   req.io
+//   //     .to(socket.roomNumber)
+//   //     .emit('message', `${socket.name} : ` + message); // 모든 클라이언트에 메시지를 전송
+//   // });
+// });
+// const { join } = require('node:path');
+// };
