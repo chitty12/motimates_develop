@@ -117,8 +117,8 @@ exports.getGroupChats = async (req, res) => {
     // });
 
     // const { join } = require('node:path');
-    // res.sendFile(join(__dirname, '/../public/chat.html'));
-    res.render('chat');
+
+    res.send({ isSuccess: true, msg: 'socket start' });
   } catch (err) {
     console.error(err);
     res.send({ isSuccess: false, msg: 'error' });
