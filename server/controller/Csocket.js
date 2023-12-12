@@ -32,10 +32,8 @@ exports.getGroupChats = async (req, res) => {
 
     const user = await jwt.verify(token);
     const uSeq = user.uSeq;
-    const userInfo = await User.findOne({
-      where: { uSeq },
-    });
-    const { uName } = userInfo;
+
+    // req.data = gSeq, uName
 
     // 1. 유저 로그인 : 유저 토큰 - uSeq로 가입된 모임에 모두 입장!
     // 2. 해당 모임 클릭시 : gSeq - 모임별 채팅방 대화 목록.
@@ -72,7 +70,7 @@ exports.getGroupChats = async (req, res) => {
       // 연결 이벤트 핸들러
       console.log(`Socket ${socketId} connected.`);
 
-      const rooms = ['room1', 'room2', 'room3'];
+      const rooms = ['room1', 'room2', 'room3']; // user가 참여하고 있는 모임의 gSeq
 
       // 다른 이벤트 핸들러 등록 가능
       // 각 모임방에 notice + 입장
@@ -92,10 +90,6 @@ exports.getGroupChats = async (req, res) => {
         connectedSockets.delete(socketId);
       });
     });
-
-    //   // socket.on('login', (data) => {
-    //   //   console.log('data ::::: ', data);
-    //   //   const { uSeq, uName, gName, gSeq } = data;
 
     //   //   // 클라이언트에서 로그인 이벤트를 보내면, 연결을 저장하고 해당 연결을 사용
     //   //   if (!connectedUser[uSeq]) {
