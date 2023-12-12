@@ -17,14 +17,14 @@
 }
 
 .header-divTwo {
-    display: flex;
+    // display: flex;
     flex-direction: row;
     transition: all 1s;
     width: 100%;
     justify-content: flex-end;
+    display: none;
 
     @include media('<800px') {
-        // display: none;
         flex-direction: column;
         display: grid;
     }
@@ -63,8 +63,7 @@
     display: none;
 
     @include media('<800px') {
-        display: grid !important;
-        flex-direction: column !important;
+        display: flex !important;
     }
 }
 

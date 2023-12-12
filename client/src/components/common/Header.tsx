@@ -187,6 +187,11 @@ export default function Header(props: any) {
         setIsActive('group');
     };
 
+    const [isAlarm, setIsAlarm] = useState<boolean>(false);
+    const alarmHandler = () => {
+        setIsAlarm(!isAlarm);
+    };
+
     return (
         <>
             <div className="header-blur">
@@ -345,6 +350,17 @@ export default function Header(props: any) {
                                                 <span id="chat-text">Chat</span>
                                             </div>
                                         )}
+
+                                        <div className="logout-icon-container">
+                                            <img
+                                                src="/asset/icons/Bell.svg"
+                                                alt="alarm"
+                                                onClick={alarmHandler}
+                                                // id="alarm-btn"
+                                                id="logout-btn"
+                                            />
+                                            <span id="logout-text">Bell</span>
+                                        </div>
 
                                         <div className="logout-icon-container">
                                             <img
