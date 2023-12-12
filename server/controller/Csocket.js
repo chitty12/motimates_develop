@@ -18,6 +18,7 @@ exports.getGroupChats = async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const user = await jwt.verify(token);
     const uSeq = user.uSeq;
+    
     if (!token) {
       res.send({
         success: false,
