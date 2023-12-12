@@ -187,7 +187,7 @@ export default function Content(props: any) {
 
     const [madeGroupInfo, setMadeGroupInfo] = useState<any>([]);
 
-    //=== 달성률에 따른 캐릭터 이미지 변경
+    //=== 달성률에 따른 캐릭터 이미지 변경 ===
     console.log('selectedCharacter', selectedCharacter); // /asset/images/sqr1.svg
 
     let charNum = selectedCharacter?.slice(-5, -4); // 2

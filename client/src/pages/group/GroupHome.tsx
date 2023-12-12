@@ -18,8 +18,6 @@ import MemberList from '../../components/group/home/MemberList';
 
 import { GroupDetailType, RootStateType } from '../../../src/types/types'; // Redux 스토어 전체 타입을 가져옵니다.
 
-// import JSConfetti from 'js-confetti'; //_ 빵빠레
-
 export default function GroupHome() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
