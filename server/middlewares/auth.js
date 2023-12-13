@@ -14,8 +14,8 @@ const authUtil = {
       if (!token) return res.send({ error: '토큰 없음' });
       // decode
       const user = await jwt.verify(token);
-      console.log('디코딩 된 토큰 :', user);
-      console.log(' 토큰 :', token);
+      // console.log('디코딩 된 토큰 :', user);
+      // console.log(' 토큰 :', token);
       // 유효기간 만료
       if (user === TOKEN_EXPIRED)
         return res.send({ error: '유효기간 만료된 토큰' });
