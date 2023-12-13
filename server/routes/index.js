@@ -6,7 +6,7 @@ const groupRouter = require('./group');
 const boardRouter = require('./board');
 const commentRouter = require('./comment');
 const missionRouter = require('./mission');
-const socketRouter = require('../socket');
+// const socketRouter = require('../controller/socket');
 
 // index 라우터에는 각각의 라우터에 대한 태그와 설명을 작성
 /**
