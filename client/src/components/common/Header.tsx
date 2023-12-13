@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
+import { getSocket } from 'src/socket';
 
 import { grey } from '@mui/material/colors';
 import { Button, ButtonGroup, Divider } from '@mui/material';
@@ -16,13 +17,36 @@ export default function Header(props: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
 
-    const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+    //=== 채팅 ===
+    // const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+    const socket = getSocket();
 
     useEffect(() => {
         if (cookie.get('isUser')) {
             setIsCookie(true);
+            socket.on('connect', () => {
+                console.log('클라이언트 연결 완료 ::', socket.id);
+            });
+
+            socket.on('send', (data: any) => {
+                console.log('socket server connected.');
+                console.log('socket server connected.', data);
+            });
         } else setIsCookie(false);
     }, [cookie]);
+
+    // useEffect(() => {
+    //     // const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+
+    //     socket.on('connect', () => {
+    //         console.log('클라이언트 연결 완료 ::', socket.id);
+    //     });
+
+    //     socket.on('send', (data: any) => {
+    //         console.log('socket server connected.');
+    //         console.log('socket server connected.', data);
+    //     });
+    // }, []);
 
     const theme = createTheme({
         palette: {
@@ -197,7 +221,10 @@ export default function Header(props: any) {
             <div className="header-blur">
                 <div className="header-container">
                     {/* 로고 */}
-                    <div className="header-divOne">
+                    <div
+                        className="header-divOne"
+                        style={{ zIndex: '0', height: '120px' }}
+                    >
                         <Link to="/">
                             <div className="title1 logo-text">MOTI</div>
                             {/* <div className="logo-container">

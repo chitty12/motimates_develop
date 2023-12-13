@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import axios from 'axios';
 
 // import { createContext } from 'react';
@@ -86,7 +86,7 @@ export default function SidebarChat() {
     //     socketInstance = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
     // }
 
-    const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+    // const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
     // const socket = io('http://localhost:8888/api/socket/chat');
 
     // const getChat = async () => {
@@ -113,18 +113,18 @@ export default function SidebarChat() {
     //     getChat();
     // }, []);
 
-    useEffect(() => {
-        // const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+    // useEffect(() => {
+    //     // const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
 
-        socket.on('connect', () => {
-            console.log('클라이언트 연결 완료 ::', socket.id);
-        });
+    //     socket.on('connect', () => {
+    //         console.log('클라이언트 연결 완료 ::', socket.id);
+    //     });
 
-        socket.on('send', (data) => {
-            console.log('socket server connected.');
-            console.log('socket server connected.', data);
-        });
-    }, []);
+    //     socket.on('send', (data) => {
+    //         console.log('socket server connected.');
+    //         console.log('socket server connected.', data);
+    //     });
+    // }, []);
 
     // socket.on('message', function (message: string) {
     //     console.log(message);

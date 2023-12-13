@@ -27,22 +27,22 @@ export default function CurRanking({
                             <li>
                                 <div className="ranking-list-cur">
                                     <div className="ranking">{idx + 1}</div>
-                                    <div className="ranking">
-                                        <img
-                                            src={
-                                                now.uImg ||
-                                                '/asset/images/user.svg'
-                                            }
-                                            alt="userImg"
+
+                                    <img
+                                        src={
+                                            now.uImg || '/asset/images/user.svg'
+                                        }
+                                        alt="userImg"
+                                    />
+
+                                    <div className="name-bar-wrapper">
+                                        <div className="name">{now.uName}</div>
+
+                                        <Progressbar
+                                            score={nowScoreRanking[idx]}
+                                            bg={'#e0e0e0'}
                                         />
                                     </div>
-
-                                    <div className="name">{now.uName}</div>
-
-                                    <Progressbar
-                                        score={nowScoreRanking[idx]}
-                                        bg={'#e0e0e0'}
-                                    />
                                 </div>
                             </li>
                         );
