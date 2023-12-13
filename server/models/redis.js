@@ -1,5 +1,4 @@
 // Redis 세팅
-const express = require('express');
 const redis = require('redis');
 // env
 const dotenv = require('dotenv');

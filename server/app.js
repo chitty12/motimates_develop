@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
+const authUtil = require('./middlewares/auth.js').checkToken;
 const { setupSocket } = require('./controller/Csocket.js');
 
 // NODE.ENV가 지정되어 있지 않으면 development 모드로 실행
@@ -72,14 +73,10 @@ const options = {
   },
 };
 
-setupSocket(server, options);
-
-// Socket.io와 Express 애플리케이션을 설정하고 사용합니다.
-// app.use((req, res, next) => {
-//   req.io = io; // req.io에 Socket.io 객체를 할당합니다.
-//   next();
-//   // next()가 있을때와 없을때의 차이점
-// });
+// 해당 요청이 있을 경우 소켓통신 시작
+app.get('/api/chat', authUtil, (req, res) =>
+  setupSocket(server, options, req, res)
+);
 
 /**
  * @path {GET} ${URL}:${PORT}/api
