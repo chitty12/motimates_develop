@@ -33,3 +33,17 @@
 .chatting-div {
     // background-color: white;
 }
+
+.item-sidebar-box-list {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 5rem;
+    // background-color: rgb(255, 140, 141);
+    height: 100%;
+    align-items: flex-start;
+    transition: all 0.4s;
+}
+
+.MuiGrid2-root {
+    background-color: #e0e0e0;
+}

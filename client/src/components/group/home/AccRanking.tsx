@@ -14,7 +14,7 @@ export default function AccRanking({
                     {/* 2023.09.30-2023.10.30 */}
                 </div>
             </div>
-            <div className="main-content">
+            <div className="main-content acc-rank-box">
                 <ul className="list-unstyled">
                     {totalRanking?.map((total: any, idx: number) => {
                         return (
@@ -28,7 +28,9 @@ export default function AccRanking({
                                         }
                                         alt="uerImg"
                                     />
-                                    <div className="name">{total.uName}</div>
+                                    <div className="name acc-name">
+                                        {total.uName}
+                                    </div>
                                     <div className="cur-ranking-content">
                                         <div className="score">
                                             {

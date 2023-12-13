@@ -30,7 +30,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 30px;
+    padding: 20px;
     box-sizing: border-box;
     width: 100%;
 }
@@ -56,7 +56,7 @@
         text-align: center;
         justify-content: center;
         align-self: center;
-        padding: 0.4rem;
+        padding: 0.4rem 0.6rem;
         border-radius: 0.4rem;
         box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
     }
@@ -129,7 +129,7 @@
     border-radius: 10px;
     width: 100%;
     margin-top: 20px;
-    padding: 30px;
+    padding: 20px 40px;
     box-sizing: border-box;
     white-space: pre-line; // textarea 에서 작성한 그대로 저장
     overflow-wrap: break-word; // 글씨 화면 넘김 방지
@@ -165,6 +165,7 @@
 }
 
 //=== 랭킹 ===
+
 .ranking-container {
     display: flex;
     width: 100%;
@@ -201,8 +202,12 @@
     font-weight: normal;
 }
 
+.member-list-name-text {
+    padding-left: 2rem;
+}
+
 .cur-ranking-content {
-    width: 100%;
+    // width: 100%;
     font-weight: bold;
     display: flex;
     flex-direction: row;
@@ -225,6 +230,11 @@
 
 .score {
     font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.acc-rank-box {
+    // padding: 1rem 0;
 }
 
 //=== 멤버 ===
@@ -248,34 +258,55 @@
 }
 
 .ranking-list-cur {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 4fr;
-    gap: 6px;
+    display: flex;
+
+    width: 100%;
+
+    .name-bar-wrapper {
+        width: 100%;
+    }
+
+    .progress-div {
+        width: 100%;
+    }
 }
+
 .ranking {
     display: flex;
     align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    padding-right: 1.3rem;
+    font-size: 1.4rem;
 }
 
 .ranking-list-cur img {
     @include box(40px);
     border-radius: 50%;
+    padding-right: 0.8rem;
 }
 
 .ranking-list-acc {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    padding: 0.2rem 0;
 }
 
 .name {
     white-space: nowrap;
     display: flex;
-    justify-content: center;
     align-items: center;
+    padding: 0.3rem 0.5rem;
+    font-weight: normal;
 }
+
+.acc-name {
+    width: 200%;
+}
+
 .ranking-list-acc img {
     @include box(40px);
     border-radius: 50%;
+}
+
+.participant-list {
+    display: flex;
+    gap: 0.3rem;
 }
