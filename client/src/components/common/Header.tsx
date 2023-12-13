@@ -21,17 +21,55 @@ export default function Header(props: any) {
     // const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
     const socket = getSocket();
 
+    //-- socket 연결
+    // Login 여부 상관없이 연결 (토큰 인증 때문)
+    // socket.on('connect', () => {
+    //     console.log('클라이언트 연결 완료 ::', socket.id);
+    // });
+
+    socket.on('connect', (data: any) => {
+        console.log('클라이언트 연결 완료 ::', data);
+    });
+
+    // [ TEST ]
+    socket.on('send', (data: any) => {
+        console.log('socket server connected.');
+        console.log('socket server connected.', data);
+    });
+
+    const [loginData, setLoginData] = useState([]);
+
+    //-- Login
     useEffect(() => {
         if (cookie.get('isUser')) {
             setIsCookie(true);
-            socket.on('connect', () => {
-                console.log('클라이언트 연결 완료 ::', socket.id);
-            });
 
-            socket.on('send', (data: any) => {
-                console.log('socket server connected.');
-                console.log('socket server connected.', data);
-            });
+            //; 채팅 login
+
+            // 1. 사용자 데이터 가져오기
+            // const getUserData = async () => {
+            //     await axios
+            //         .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+            //             headers: {
+            //                 Authorization: `Bearer ${uToken}`,
+            //             },
+            //         })
+            //         .then((res) => {
+            //             // console.log('user', res.data);
+            //             const { nickname } = res.data;
+            //             setUName(nickname);
+            //         });
+            // };
+
+            // useEffect(() => {
+            //     getUserData();
+            // }, []);
+
+            // socket.emit('login', () => {
+            //     console.log('클라이언트 login ======= ', loginData);
+            // });
+
+            // data =[{gSeq: , uName:}]
         } else setIsCookie(false);
     }, [cookie]);
 
@@ -112,14 +150,16 @@ export default function Header(props: any) {
     const logoutHandler = () => {
         // [추후] 로그아웃 모달창 처리
         if (window.confirm('로그아웃하시겠습니까 ?')) {
-            // 채팅 종료
-            // socket.disconnect();
+            //-- 채팅 종료
+            socket.emit('logout', () => {
+                // socket.disconnect();
 
-            // socket.emit('logout', () => {
-            //     // socket.disconnect();
+                console.log('socket server disconnected.');
+            });
 
-            //     console.log('socket server disconnected.');
-            // });
+            socket.emit('discoonect', () => {
+                console.log('socket server disconnected.');
+            });
 
             // getChat();
 
