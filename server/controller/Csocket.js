@@ -13,7 +13,6 @@ exports.setupSocket = async (server, options) => {
 
   // Set 객체생성 : 중복된 값을 허용하지 않는 데이터 구조.
   const connectedSockets = new Set();
-  const loginTime = new Date();
 
   // 네임스페이스 생성(모임챗) - 룸: 각 모임별 챗
   // Express의 라우팅처럼 url에 지정된 위치에 따라 신호의 처리를 다르게 하는 기술(특정 페이지에서 소켓이 보내주는 모든 실시간 메세지를 받을 필요는 없다)
@@ -66,8 +65,11 @@ exports.setupSocket = async (server, options) => {
       // 2. 모임별 채팅방에 입장 및 notice (생성된 룸없을 경우 직접 생성)
       socket.on('login', (data) => {
         try {
+          const uSeq = data.uSeq;
+          const uName = data.uName;
+
           if (Array.isArray(data)) {
-            data.map((info) => {
+            data.gSeq.map((info) => {
               const isExisting = groupChat.adapter.rooms.has(
                 `room${info.gSeq}`
               );
@@ -75,12 +77,15 @@ exports.setupSocket = async (server, options) => {
                 socket.join(`room${info.gSeq}`);
                 groupChat
                   .to(`room${info.gSeq}`)
-                  .emit('success', { msg: `${info.uName}님이 로그인하셨어요` });
+                  .emit('success', { msg: `${uName}님이 로그인하셨어요` });
               } else {
                 groupChat.adapter.socketsJoin(socketId, `room${info.gSeq}`);
               }
             });
           }
+
+          const loginTime = new Date();
+
           // 현재 연결 중인 유저 추가 : socketId의 키값을 가진 객체로 저장.
           connectedUser[socketId] = { socketId, uSeq, uName, loginTime };
 
