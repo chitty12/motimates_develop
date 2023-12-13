@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
+import axios from 'axios';
+import { getSocket } from 'src/socket';
 
 import Content from '../components/main/Content';
 
 export default function Main() {
+    const socket = getSocket();
+
+    //_ loginData = {uSeq, uName, [gSeq]}
+    const [loginData, setLoginData] = useState([]); // socket 서버 전송
+    const [uName, setUName] = useState(''); // 닉네임
+    const [uSeq, setUSeq] = useState(1); // 유저 번호
+    const [gSeq, setGSeq] = useState([]); // 참여 모임
+
     // 1. 사용자 명언 정보 가져오기
     // 1-1. 명언 변수
     const [phraseCtt, setPhraseCtt] = useState<string | null>(null);
@@ -24,9 +33,44 @@ export default function Main() {
     let myCookie = new Cookies();
     if (uToken) {
         myCookie.set('isUser', uToken);
+
+        socket.emit('login', () => {
+            console.log('클라이언트 login ======= ', loginData);
+        });
+
+        // const loginData = {
+        //     uSeq,
+        //     uName: 'Test 유저',
+        //     gName: '임시 모임',
+        //     gSeq,
+        //   };
     }
 
-    console.log('isUser', myCookie.get('isUser'));
+    // console.log('isUser', myCookie.get('isUser'));
+
+    //=== 채팅 login ===
+
+    // 1. 사용자 데이터 가져오기
+    const getUserData = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                const { nickname } = res.data;
+                setUName(nickname);
+                console.log('===========', res.data);
+            });
+    };
+
+    useEffect(() => {
+        getUserData();
+    }, []);
+
+    //_ loginData = {uSeq, uName, [gSeq]}
+    console.log('loginData::::::', loginData);
 
     return (
         <div className="section-main">

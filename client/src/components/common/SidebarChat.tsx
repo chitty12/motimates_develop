@@ -48,13 +48,6 @@ export default function SidebarChat() {
 
     // const [message, setMessage] = useState<string>('');
 
-    // const data = {
-    //     uSeq,
-    //     uName: 'Test 유저',
-    //     gName: '임시 모임',
-    //     gSeq,
-    //   };
-
     // 1. 사용자 데이터 가져오기
     const getUserData = async () => {
         await axios

@@ -10,6 +10,7 @@ import TesterLoginBtn2 from 'src/components/login/TesterLoginBtn2';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login(props: any) {
+    // 로그인 버튼
     const testLogin1 = (testNum: number): void => {
         window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/test?testNum=${testNum}`;
     };
@@ -50,17 +51,11 @@ export default function Login(props: any) {
 
     document.addEventListener('click', clickEffect);
 
-    // 로그인 페이지 구분
+    //-- 로그인 페이지 구분
     const navigate = useNavigate();
 
     useEffect(() => {
         props.setIsLogin(true);
-
-        // 페이지를 벗어날 때 이벤트 핸들러 등록
-        // const handleLeavePage = () => {
-        //     // 페이지를 벗어날 때 setIsLogin(false) 호출
-        //     props.setIsLogin(false);
-        // };
 
         // 컴포넌트가 마운트될 때 이벤트 핸들러 등록
         const unmountHandler = () => {
