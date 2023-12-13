@@ -38,7 +38,7 @@ export default function SidebarChat() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    const [uName, setUName] = useState(''); // 모임 번호
+    const [uName, setUName] = useState(''); // 닉네임
     const [nowGSeq, setNowGSeq] = useState(1); // 모임 번호
     const [nowGName, setNowGName] = useState(''); // 모임 번호
     const [isEnter, setIsEnter] = useState(false); // 입장/나가기
@@ -83,10 +83,10 @@ export default function SidebarChat() {
     // }
 
     // if (!socketInstance) {
-    // socketInstance = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+    //     socketInstance = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
     // }
 
-    // const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+    const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
     // const socket = io('http://localhost:8888/api/socket/chat');
 
     // const getChat = async () => {
@@ -114,7 +114,7 @@ export default function SidebarChat() {
     // }, []);
 
     useEffect(() => {
-        const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
+        // const socket = io(`${process.env.REACT_APP_DB_HOST}/socket/chat`);
 
         socket.on('connect', () => {
             console.log('클라이언트 연결 완료 ::', socket.id);
