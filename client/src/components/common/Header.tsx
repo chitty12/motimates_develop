@@ -34,18 +34,18 @@ export default function Header(props: any) {
     });
 
     // 리사이즈 이벤트에 따라 너비값 측정
-    const [myWidth, setMyWidth] = useState<number>(window.innerWidth);
+    // const [myWidth, setMyWidth] = useState<number>(window.innerWidth);
 
-    // window.onresize = () => {
-    //     setMyWidth(window.innerWidth);
-    // };
+    // // window.onresize = () => {
+    // //     setMyWidth(window.innerWidth);
+    // // };
 
-    // 헤더 메뉴 보여주기
+    // // 헤더 메뉴 보여주기
     const [isVisibleMobile, setIsVisibleMobile] = useState<boolean>(true);
     const toggleVal = (): void => {
-        if (myWidth < 800) {
-            setIsVisibleMobile((prev) => !prev);
-        }
+        // if (myWidth < 800) {
+        setIsVisibleMobile((prev) => !prev);
+        // }
     };
 
     // useEffect(() => {
@@ -356,10 +356,9 @@ export default function Header(props: any) {
                                                 src="/asset/icons/Bell.svg"
                                                 alt="alarm"
                                                 onClick={alarmHandler}
-                                                // id="alarm-btn"
                                                 id="logout-btn"
                                             />
-                                            <span id="logout-text">Bell</span>
+                                            {/* <span id="logout-text">Bell</span> */}
                                         </div>
 
                                         <div className="logout-icon-container">
@@ -404,15 +403,14 @@ export default function Header(props: any) {
                 </div>
 
                 {/* 모바일일 때 메뉴 바*/}
-                <div
-                    className="header-divTwo mobMode"
-                    style={{
-                        display:
-                            isVisibleMobile && myWidth < 800 ? 'flex' : 'none',
-                    }}
-                >
+                <div className="header-divTwo mobMode">
                     <nav className="header-nav ">
-                        <ul className="menu">
+                        <ul
+                            className="menu"
+                            style={{
+                                display: isVisibleMobile ? 'flex' : 'none',
+                            }}
+                        >
                             <li>
                                 <Link to="/main">
                                     <button className="menu-button">
@@ -458,14 +456,14 @@ export default function Header(props: any) {
                                         }}
                                     >
                                         {/* 로그인 시 */}
-                                        {/* 채팅 컴포넌트 */}
+                                        {/* 모바일에서 - 채팅 컴포넌트 */}
                                         {/* <li id="chat-li"> */}
-                                        <img
+                                        {/* <img
                                             src="/asset/icons/chat.svg"
                                             alt="chatImg"
                                             onClick={() => props.showChatting()}
                                             id="chat-btn"
-                                        />
+                                        /> */}
                                         {/* </li> */}
                                         <img
                                             src="/asset/icons/logout.svg"
